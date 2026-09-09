@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -153,8 +153,8 @@
       
     
     
-    <img src="../_static/logo.jpeg" class="logo__image only-light" alt="PPW - Web Search & Mining - Home"/>
-    <script>document.write(`<img src="../_static/logo.jpeg" class="logo__image only-dark" alt="PPW - Web Search & Mining - Home"/>`);</script>
+    <img src="../_static/logo.1.png" class="logo__image only-light" alt="PPW - Web Search & Mining - Home"/>
+    <script>document.write(`<img src="../_static/logo.1.png" class="logo__image only-dark" alt="PPW - Web Search & Mining - Home"/>`);</script>
   
   
 </a></div>
@@ -175,11 +175,13 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    PPW - Web Search & Mining
+                    PPW (Pencarian dan Penambangan Web) - Web Search & Mining
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../profile.html">Profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pengantar.html">Pengantar Web Mining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Business.html">Business Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="EDA.html">Data Understanding</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Preparation</a></li>
@@ -229,7 +231,7 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/haninhammoud01/ppw" target="_blank"
+<a href="https://github.com/alishasalsa/ppw" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -369,11 +371,12 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="data-preparation">
 <h1>Data Preparation<a class="headerlink" href="#data-preparation" title="Link to this heading">#</a></h1>
-<p>Tahap ini menjelaskan proses pengumpulan (crawling) dan penyusunan dataset 200 artikel berita dari <a class="reference external" href="http://Detik.com">Detik.com</a>. Proses ini terdiri dari 4 tahap utama:</p>
+<p>Tahap ini menjelaskan proses pengumpulan dan penyiapan data berita yang akan digunakan. Data dikumpulkan dari situs <a class="reference external" href="http://Detik.com">Detik.com</a> dengan menggunakan crawling untuk memperoleh 200 artikel berita.
+Crawling adalah proses mengumpulkan data dari halaman web secara otomatis menggunakan program atau script.</p>
 <ol class="arabic simple">
 <li><p>Mengumpulkan URL artikel secara otomatis dari halaman indeks kategori</p></li>
 <li><p>Mengekstrak isi utama setiap artikel menggunakan Trafilatura</p></li>
-<li><p>Memberi label sesuai kategori (<code class="docutils literal notranslate"><span class="pre">sport</span></code> / <code class="docutils literal notranslate"><span class="pre">finance</span></code>)</p></li>
+<li><p>Memberi label sesuai kategori</p></li>
 <li><p>Menggabungkan menjadi satu dataset dengan skema <code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">isi_berita</span></code>, <code class="docutils literal notranslate"><span class="pre">label</span></code>, <code class="docutils literal notranslate"><span class="pre">url</span></code></p></li>
 </ol>
 <div class="cell docutils container">
@@ -384,27 +387,24 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting lxml_html_clean
-  Downloading lxml_html_clean-0.4.5-py3-none-any.whl (14 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: lxml_html_clean in c:\alisha\ppw\enwebmining\lib\site-packages (0.4.5)
 Requirement already satisfied: lxml in c:\alisha\ppw\enwebmining\lib\site-packages (6.1.3)
 Requirement already satisfied: trafilatura in c:\alisha\ppw\enwebmining\lib\site-packages (2.2.0)
 Requirement already satisfied: courlan&gt;=1.4.0 in c:\alisha\ppw\enwebmining\lib\site-packages (from trafilatura) (1.4.0)
+Requirement already satisfied: certifi in c:\alisha\ppw\enwebmining\lib\site-packages (from trafilatura) (2026.7.22)
 Requirement already satisfied: htmldate&gt;=1.10.0 in c:\alisha\ppw\enwebmining\lib\site-packages (from trafilatura) (1.10.0)
 Requirement already satisfied: justext&gt;=3.0.2 in c:\alisha\ppw\enwebmining\lib\site-packages (from trafilatura) (3.0.2)
-Requirement already satisfied: urllib3&lt;3,&gt;=1.26 in c:\alisha\ppw\enwebmining\lib\site-packages (from trafilatura) (2.7.0)
 Requirement already satisfied: charset_normalizer&gt;=3.4.9 in c:\alisha\ppw\enwebmining\lib\site-packages (from trafilatura) (3.5.1)
-Requirement already satisfied: certifi in c:\alisha\ppw\enwebmining\lib\site-packages (from trafilatura) (2026.7.22)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.26 in c:\alisha\ppw\enwebmining\lib\site-packages (from trafilatura) (2.7.0)
 Requirement already satisfied: tld&gt;=0.13 in c:\alisha\ppw\enwebmining\lib\site-packages (from courlan&gt;=1.4.0-&gt;trafilatura) (0.13.2)
 Requirement already satisfied: babel&gt;=2.16.0 in c:\alisha\ppw\enwebmining\lib\site-packages (from courlan&gt;=1.4.0-&gt;trafilatura) (2.18.0)
 Requirement already satisfied: dateparser&gt;=1.1.2 in c:\alisha\ppw\enwebmining\lib\site-packages (from htmldate&gt;=1.10.0-&gt;trafilatura) (1.4.2)
 Requirement already satisfied: python-dateutil&gt;=2.9.0.post0 in c:\alisha\ppw\enwebmining\lib\site-packages (from htmldate&gt;=1.10.0-&gt;trafilatura) (2.9.0.post0)
 Requirement already satisfied: regex&gt;=2024.9.11 in c:\alisha\ppw\enwebmining\lib\site-packages (from dateparser&gt;=1.1.2-&gt;htmldate&gt;=1.10.0-&gt;trafilatura) (2026.9.3)
-Requirement already satisfied: pytz&gt;=2024.2 in c:\alisha\ppw\enwebmining\lib\site-packages (from dateparser&gt;=1.1.2-&gt;htmldate&gt;=1.10.0-&gt;trafilatura) (2026.3.post1)
 Requirement already satisfied: tzlocal&gt;=0.2 in c:\alisha\ppw\enwebmining\lib\site-packages (from dateparser&gt;=1.1.2-&gt;htmldate&gt;=1.10.0-&gt;trafilatura) (5.4.4)
+Requirement already satisfied: pytz&gt;=2024.2 in c:\alisha\ppw\enwebmining\lib\site-packages (from dateparser&gt;=1.1.2-&gt;htmldate&gt;=1.10.0-&gt;trafilatura) (2026.3.post1)
 Requirement already satisfied: six&gt;=1.5 in c:\alisha\ppw\enwebmining\lib\site-packages (from python-dateutil&gt;=2.9.0.post0-&gt;htmldate&gt;=1.10.0-&gt;trafilatura) (1.17.0)
 Requirement already satisfied: tzdata in c:\alisha\ppw\enwebmining\lib\site-packages (from tzlocal&gt;=0.2-&gt;dateparser&gt;=1.1.2-&gt;htmldate&gt;=1.10.0-&gt;trafilatura) (2026.3)
-Installing collected packages: lxml_html_clean
-Successfully installed lxml_html_clean-0.4.5
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: lxml 6.1.3 does not provide the extra 'html_clean'
@@ -476,7 +476,7 @@ Successfully installed lxml_html_clean-0.4.5
         &lt;script type="text/javascript" src="https://iat.detiknetwork.com/ip-information.js"&gt;&lt;/script&gt;
         &lt;link rel="preconnect" href="https://awscdn.detik.net.id"&gt;&lt;link rel="preconnect" href="https://awscdn.detik.net.id" crossorigin&gt;&lt;link rel="preconnect" href="https://cdn.detik.net.id"&gt;&lt;link rel="preconnect" href="https://cdn.detik.net.id" crossorigin&gt;        &lt;link rel="dns-prefetch" href="https://cdn.detik.net.id"/&gt;&lt;link rel="dns-prefetch" h
 
-Total panjang HTML mentah: 251,384 karakter
+Total panjang HTML mentah: 251,538 karakter
 
 --- HASIL EKSTRAKSI TRAFILATURA (potongan 500 karakter pertama) ---
 Marco Bezzecchi tak sabar menghadapi MotoGP San Marino 2026. Bagi pebalap Aprilia itu, balapan di Sirkuit Misano punya arti khusus karena lokasinya sangat dekat dengan kampung halamannya, Rimini.
@@ -523,6 +523,8 @@ Total panjang hasil ekstraksi: 1,832 karakter
 </div>
 </div>
 </div>
+<p>Kode tersebut merupakan bagian dari proses web crawling, khususnya tahap pengumpulan URL artikel dari halaman indeks <a class="reference external" href="http://Detik.com">Detik.com</a>. Fungsi ambil_url_dari_halaman_index() digunakan untuk mengambil URL artikel dari satu halaman indeks, sedangkan kumpulkan_url_kategori() mengumpulkan URL dari beberapa halaman indeks hingga mencapai jumlah yang ditentukan.</p>
+<p>Dengan proses tersebut, URL artikel dapat dikumpulkan secara otomatis, menghindari duplikasi, dan digunakan sebagai sumber untuk tahap berikutnya, yaitu mengambil isi artikel dan membentuk dataset berita</p>
 </section>
 <section id="proses-crawling-penyusunan-dataset">
 <h2>3. Proses Crawling &amp; Penyusunan Dataset<a class="headerlink" href="#proses-crawling-penyusunan-dataset" title="Link to this heading">#</a></h2>
@@ -565,19 +567,12 @@ Total panjang hasil ekstraksi: 1,832 karakter
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting openpyxl
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: openpyxl in c:\alisha\ppw\enwebmining\lib\site-packages (3.1.5)
+Requirement already satisfied: et-xmlfile in c:\alisha\ppw\enwebmining\lib\site-packages (from openpyxl) (2.0.0)
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[notice] A new release of pip available: 22.2.1 -&gt; 26.2.1
 [notice] To update, run: python.exe -m pip install --upgrade pip
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading openpyxl-3.1.5-py2.py3-none-any.whl (250 kB)
-     -------------------------------------- 250.9/250.9 kB 1.7 MB/s eta 0:00:00
-Collecting et-xmlfile
-  Downloading et_xmlfile-2.0.0-py3-none-any.whl (18 kB)
-Installing collected packages: et-xmlfile, openpyxl
-Successfully installed et-xmlfile-2.0.0 openpyxl-3.1.5
 </pre></div>
 </div>
 </div>
@@ -661,6 +656,7 @@ Total baris: 200
 </table>
 </div></div></div>
 </div>
+<p>Kode ini digunakan untuk menghasilkan dataset berita sebanyak 200 artikel dari hasil crawling <a class="reference external" href="http://Detik.com">Detik.com</a>, terdiri dari 100 artikel Sport dan 100 artikel Finance, kemudian menyimpannya ke Excel. Jika dataset sudah tersedia dan tidak ingin crawling ulang, program akan langsung membaca file Excel tersebut.</p>
 </section>
 <section id="validasi-dataset-akhir">
 <h2>4. Validasi Dataset Akhir<a class="headerlink" href="#validasi-dataset-akhir" title="Link to this heading">#</a></h2>
@@ -672,12 +668,12 @@ Total baris: 200
 <span class="k">assert</span> <span class="n">df</span><span class="p">[</span><span class="s2">"isi_berita"</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"Tidak boleh ada isi_berita kosong"</span>
 <span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"isi_berita"</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">,</span> <span class="s2">"url"</span><span class="p">],</span> <span class="s2">"Skema kolom harus id, isi_berita, label, url"</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Semua validasi lolos. Dataset siap digunakan untuk tahap Modeling."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Semua validasi berhasil. Dataset siap digunakan untuk tahap Modeling."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Semua validasi lolos. Dataset siap digunakan untuk tahap Modeling.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Semua validasi berhasil. Dataset siap digunakan untuk tahap Modeling.
 </pre></div>
 </div>
 </div>

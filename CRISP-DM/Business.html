@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Data Understanding" href="EDA.html" />
-    <link rel="prev" title="PPW - Web Search &amp; Mining" href="../intro.html" />
+    <link rel="prev" title="Profile" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -153,8 +153,8 @@
       
     
     
-    <img src="../_static/logo.jpeg" class="logo__image only-light" alt="PPW - Web Search & Mining - Home"/>
-    <script>document.write(`<img src="../_static/logo.jpeg" class="logo__image only-dark" alt="PPW - Web Search & Mining - Home"/>`);</script>
+    <img src="../_static/logo.1.png" class="logo__image only-light" alt="PPW - Web Search & Mining - Home"/>
+    <script>document.write(`<img src="../_static/logo.1.png" class="logo__image only-dark" alt="PPW - Web Search & Mining - Home"/>`);</script>
   
   
 </a></div>
@@ -175,7 +175,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    PPW - Web Search & Mining
+                    Profile
                 </a>
             </li>
         </ul>
@@ -229,7 +229,7 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/haninhammoud01/ppw" target="_blank"
+<a href="https://github.com/alishasalsa/ppw" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -349,11 +349,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-problem">1. Define the Problem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-objectives">2. Set Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identify-stakeholders">3. Identify Stakeholders</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-success-criteria">4. Define Success Criteria</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assess-situation-constraints-ethics">5. Assess Situation (Constraints &amp; Ethics)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengidentifikasi-masalah">1. Mengidentifikasi Masalah</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan">2. Menentukan Tujuan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengidentifikasi-pihak-yang-berkepentingan">3. Mengidentifikasi Pihak Yang Berkepentingan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-kriteria-keberhasilan">4. Menentukan Kriteria Keberhasilan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menilai-situasi-batasan-dan-etika">5. Menilai Situasi, Batasan, dan Etika</a></li>
 </ul>
             </nav>
         </div>
@@ -367,40 +367,60 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="business-understanding">
 <h1>Business Understanding<a class="headerlink" href="#business-understanding" title="Link to this heading">#</a></h1>
-<section id="define-the-problem">
-<h2>1. Define the Problem<a class="headerlink" href="#define-the-problem" title="Link to this heading">#</a></h2>
-<p>Mengumpulkan <strong>200 artikel berita Indonesia</strong> dari <a class="reference external" href="https://detik.com">detik.com</a> sebagai dataset untuk tugas mata kuliah Pencarian dan Penambangan Web (PPW), disusun mengikuti metodologi CRISP-DM. Fokus masalahnya adalah kategorisasi berita Indonesia (sport vs finance), yang akan dikerjakan pada tahap-tahap CRISP-DM selanjutnya.</p>
+<section id="mengidentifikasi-masalah">
+<h2>1. Mengidentifikasi Masalah<a class="headerlink" href="#mengidentifikasi-masalah" title="Link to this heading">#</a></h2>
+<p>Mengumpulkan <strong>200 artikel berita Indonesia</strong> dari <a class="reference external" href="https://www.detik.com/">Detik.com</a> sebagai dataset untuk tugas mata kuliah <strong>Pencarian dan Penambangan Web (PPW)</strong>. Proses pengumpulan data disusun mengikuti metodologi <strong>CRISP-DM</strong>.</p>
+<p>Fokus permasalahan adalah melakukan <strong>kategorisasi berita Indonesia</strong> ke dalam dua kategori, yaitu <strong>sport</strong> dan <strong>finance</strong>. Tahapan pengolahan dan klasifikasi data akan dilanjutkan pada tahap-tahap CRISP-DM berikutnya.</p>
 </section>
-<section id="set-objectives">
-<h2>2. Set Objectives<a class="headerlink" href="#set-objectives" title="Link to this heading">#</a></h2>
+<section id="menentukan-tujuan">
+<h2>2. Menentukan Tujuan<a class="headerlink" href="#menentukan-tujuan" title="Link to this heading">#</a></h2>
+<p>Tujuan dari tahap ini adalah:</p>
 <ul class="simple">
-<li><p>Membangun dataset berlabel yang bersih berisi 200 artikel (100 <strong>sport</strong>, 100 <strong>finance</strong>) dengan skema kolom <code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">isi_berita</span></code>, <code class="docutils literal notranslate"><span class="pre">label</span></code>, <code class="docutils literal notranslate"><span class="pre">url</span></code>.</p></li>
-<li><p>Menyiapkan data agar tahap CRISP-DM berikutnya (Data Preparation, Modeling, Evaluation, Deployment) bisa dikerjakan pada tugas-tugas selanjutnya.</p></li>
+<li><p>Membangun dataset berlabel yang bersih dan terdiri dari <strong>200 artikel berita</strong>.</p></li>
+<li><p>Dataset terdiri dari <strong>100 artikel kategori sport</strong> dan <strong>100 artikel kategori finance</strong>.</p></li>
+<li><p>Dataset memiliki struktur kolom:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isi_berita</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">label</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">url</span></code></p></li>
+</ul>
+</li>
+<li><p>Menyiapkan data agar dapat digunakan pada tahap <strong>Data Preparation, Modeling, Evaluation,</strong> dan <strong>Deployment</strong> pada tugas selanjutnya.</p></li>
 </ul>
 </section>
-<section id="identify-stakeholders">
-<h2>3. Identify Stakeholders<a class="headerlink" href="#identify-stakeholders" title="Link to this heading">#</a></h2>
+<section id="mengidentifikasi-pihak-yang-berkepentingan">
+<h2>3. Mengidentifikasi Pihak Yang Berkepentingan<a class="headerlink" href="#mengidentifikasi-pihak-yang-berkepentingan" title="Link to this heading">#</a></h2>
+<p>Pihak-pihak yang berkepentingan dalam proses penelitian ini meliputi:</p>
 <ul class="simple">
-<li><p><strong>Mahasiswi (saya)</strong>: menyusun tugas ini sebagai bagian dari mata kuliah praktik.</p></li>
-<li><p><strong>Dosen pengampu</strong>: mengevaluasi hasil kerja.</p></li>
-<li><p><strong>Pembaca</strong> dari Jupyter Book / GitHub Pages yang dipublikasikan.</p></li>
+<li><p><strong>Mahasiswa</strong>: menyusun dan mengolah dataset sebagai bagian dari tugas mata kuliah PPW.</p></li>
+<li><p><strong>Dosen pengampu</strong>: mengevaluasi proses dan hasil pengerjaan tugas.</p></li>
+<li><p><strong>Pembaca Jupyter Book / GitHub Pages</strong>: melihat dokumentasi proses pengumpulan dan pengolahan data.</p></li>
 </ul>
 </section>
-<section id="define-success-criteria">
-<h2>4. Define Success Criteria<a class="headerlink" href="#define-success-criteria" title="Link to this heading">#</a></h2>
+<section id="menentukan-kriteria-keberhasilan">
+<h2>4. Menentukan Kriteria Keberhasilan<a class="headerlink" href="#menentukan-kriteria-keberhasilan" title="Link to this heading">#</a></h2>
+<p>Keberhasilan proses pengumpulan data ditentukan berdasarkan beberapa kriteria berikut:</p>
 <ul class="simple">
-<li><p>Tepat <strong>200 baris</strong>: 100 <code class="docutils literal notranslate"><span class="pre">sport</span></code> (id 1-100) dan 100 <code class="docutils literal notranslate"><span class="pre">finance</span></code> (id 101-200).</p></li>
-<li><p><strong>0 nilai kosong</strong> pada <code class="docutils literal notranslate"><span class="pre">isi_berita</span></code>; <code class="docutils literal notranslate"><span class="pre">id</span></code> berurutan 1-200.</p></li>
-<li><p>Dataset dapat dimuat tanpa error dan sesuai skema kolom yang ditentukan (<code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">isi_berita</span></code>, <code class="docutils literal notranslate"><span class="pre">label</span></code>, <code class="docutils literal notranslate"><span class="pre">url</span></code>).</p></li>
+<li><p>Dataset memiliki tepat <strong>200 baris data</strong>.</p></li>
+<li><p>Terdapat <strong>100 artikel dengan label <code class="docutils literal notranslate"><span class="pre">sport</span></code></strong> dengan ID 1–100.</p></li>
+<li><p>Terdapat <strong>100 artikel dengan label <code class="docutils literal notranslate"><span class="pre">finance</span></code></strong> dengan ID 101–200.</p></li>
+<li><p>Tidak terdapat nilai kosong pada kolom <strong><code class="docutils literal notranslate"><span class="pre">isi_berita</span></code></strong>.</p></li>
+<li><p>Nilai <code class="docutils literal notranslate"><span class="pre">id</span></code> tersusun secara berurutan dari <strong>1 sampai 200</strong>.</p></li>
+<li><p>Dataset dapat dimuat tanpa error.</p></li>
+<li><p>Dataset memiliki struktur kolom yang sesuai, yaitu:
+<code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">isi_berita</span></code>, <code class="docutils literal notranslate"><span class="pre">label</span></code>, dan <code class="docutils literal notranslate"><span class="pre">url</span></code>.</p></li>
 </ul>
 </section>
-<section id="assess-situation-constraints-ethics">
-<h2>5. Assess Situation (Constraints &amp; Ethics)<a class="headerlink" href="#assess-situation-constraints-ethics" title="Link to this heading">#</a></h2>
-<p>Proses pengumpulan data memperhatikan crawling yang sopan dan bertanggung jawab:</p>
+<section id="menilai-situasi-batasan-dan-etika">
+<h2>5. Menilai Situasi, Batasan, dan Etika<a class="headerlink" href="#menilai-situasi-batasan-dan-etika" title="Link to this heading">#</a></h2>
+<p>Proses pengumpulan data dilakukan dengan memperhatikan aspek teknis, etika, dan kesopanan dalam melakukan crawling.</p>
 <ul class="simple">
-<li><p><strong>Politeness</strong>: setiap request diberi jeda minimal 1 detik dan menggunakan header User-Agent seperti browser, agar tidak membebani server.</p></li>
-<li><p><strong>Tujuan</strong>: data hanya digunakan untuk <strong>keperluan pembelajaran / tugas mata kuliah ini</strong>.</p></li>
-<li><p><strong>Sumber data</strong>: seluruh URL artikel diambil secara otomatis dari halaman indeks kategori resmi <a class="reference external" href="http://Detik.com">Detik.com</a> (<code class="docutils literal notranslate"><span class="pre">sport.detik.com/indeks</span></code>, <code class="docutils literal notranslate"><span class="pre">finance.detik.com/indeks</span></code>), bukan dikumpulkan/ditulis manual.</p></li>
+<li><p><strong>Politeness</strong>: setiap request diberikan jeda minimal <strong>1 detik</strong> untuk mengurangi beban terhadap server.</p></li>
+<li><p><strong>User-Agent</strong>: request menggunakan header <strong>User-Agent</strong> yang menyerupai browser umum.</p></li>
+<li><p><strong>Tujuan penggunaan</strong>: data yang dikumpulkan hanya digunakan untuk <strong>keperluan pembelajaran dan tugas mata kuliah PPW</strong>.</p></li>
+<li><p><strong>Sumber data</strong>: URL artikel diperoleh secara otomatis melalui halaman indeks kategori resmi <a class="reference external" href="http://Detik.com">Detik.com</a>, yaitu kategori <strong>sport</strong> dan <strong>finance</strong>, bukan dikumpulkan atau ditulis secara manual.</p></li>
+<li><p><strong>Batasan data</strong>: jumlah data dibatasi sebanyak <strong>200 artikel</strong> sesuai kebutuhan tugas.</p></li>
 </ul>
 </section>
 </section>
@@ -441,7 +461,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">PPW - Web Search &amp; Mining</p>
+        <p class="prev-next-title">Profile</p>
       </div>
     </a>
     <a class="right-next"
@@ -469,11 +489,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-problem">1. Define the Problem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-objectives">2. Set Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identify-stakeholders">3. Identify Stakeholders</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-success-criteria">4. Define Success Criteria</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assess-situation-constraints-ethics">5. Assess Situation (Constraints &amp; Ethics)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengidentifikasi-masalah">1. Mengidentifikasi Masalah</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan">2. Menentukan Tujuan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengidentifikasi-pihak-yang-berkepentingan">3. Mengidentifikasi Pihak Yang Berkepentingan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-kriteria-keberhasilan">4. Menentukan Kriteria Keberhasilan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menilai-situasi-batasan-dan-etika">5. Menilai Situasi, Batasan, dan Etika</a></li>
 </ul>
   </nav></div>
 
