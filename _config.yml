@@ -1,0 +1,13 @@
+title: PPW - Web Search & Mining
+author: Hanin Hammoud
+logo: "logo.jpeg"
+
+execute:
+  execute_notebooks: "off"
+
+repository:
+  url: https://github.com/haninhammoud01/ppw
+  branch: main
+
+html:
+  use_repository_button: true

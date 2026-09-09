@@ -1,0 +1,16 @@
+format: jb-book
+root: intro
+chapters:
+  - file: CRISP-DM/Business
+    title: Business Understanding
+  - file: CRISP-DM/EDA
+    title: Data Understanding
+  - file: CRISP-DM/Input
+    title: Data Preparation
+  - file: CRISP-DM/Modeling
+    title: Modeling
+  - file: CRISP-DM/Output
+    title: Evaluation
+  - file: CRISP-DM/Production
+    title: Deployment
+    
