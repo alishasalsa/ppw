@@ -12,4 +12,3 @@ Dokumentasi ini disusun untuk tugas mata kuliah **Pencarian dan Penambangan Web 
 
 Navigasi tersedia pada menu di sebelah kiri.
 
-*Hanin Hammoud*
