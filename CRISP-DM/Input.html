@@ -1,0 +1,813 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data Preparation &#8212; PPW - Web Search &amp; Mining</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'CRISP-DM/Input';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Modeling" href="Modeling.html" />
+    <link rel="prev" title="Data Understanding" href="EDA.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpeg" class="logo__image only-light" alt="PPW - Web Search & Mining - Home"/>
+    <script>document.write(`<img src="../_static/logo.jpeg" class="logo__image only-dark" alt="PPW - Web Search & Mining - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    PPW - Web Search & Mining
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Business.html">Business Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EDA.html">Data Understanding</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modeling.html">Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Output.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Production.html">Deployment</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/haninhammoud01/ppw" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/CRISP-DM/Input.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Preparation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fungsi-ekstraksi-isi-artikel">1. Fungsi Ekstraksi Isi Artikel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstrasi-html-mentah-vs-hasil-ekstraksi">Demonstrasi: HTML Mentah vs Hasil Ekstraksi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fungsi-pengumpulan-url-artikel">2. Fungsi Pengumpulan URL Artikel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-crawling-penyusunan-dataset">3. Proses Crawling &amp; Penyusunan Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validasi-dataset-akhir">4. Validasi Dataset Akhir</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-preparation">
+<h1>Data Preparation<a class="headerlink" href="#data-preparation" title="Link to this heading">#</a></h1>
+<p>Tahap ini menjelaskan proses pengumpulan (crawling) dan penyusunan dataset 200 artikel berita dari <a class="reference external" href="http://Detik.com">Detik.com</a>. Proses ini terdiri dari 4 tahap utama:</p>
+<ol class="arabic simple">
+<li><p>Mengumpulkan URL artikel secara otomatis dari halaman indeks kategori</p></li>
+<li><p>Mengekstrak isi utama setiap artikel menggunakan Trafilatura</p></li>
+<li><p>Memberi label sesuai kategori (<code class="docutils literal notranslate"><span class="pre">sport</span></code> / <code class="docutils literal notranslate"><span class="pre">finance</span></code>)</p></li>
+<li><p>Menggabungkan menjadi satu dataset dengan skema <code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">isi_berita</span></code>, <code class="docutils literal notranslate"><span class="pre">label</span></code>, <code class="docutils literal notranslate"><span class="pre">url</span></code></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="o">!{</span>sys.executable<span class="o">}</span><span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>lxml_html_clean<span class="w"> </span>lxml<span class="w"> </span>trafilatura
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting lxml_html_clean
+  Downloading lxml_html_clean-0.4.5-py3-none-any.whl (14 kB)
+Requirement already satisfied: lxml in c:\alisha\ppw\enwebmining\lib\site-packages (6.1.3)
+Requirement already satisfied: trafilatura in c:\alisha\ppw\enwebmining\lib\site-packages (2.2.0)
+Requirement already satisfied: courlan&gt;=1.4.0 in c:\alisha\ppw\enwebmining\lib\site-packages (from trafilatura) (1.4.0)
+Requirement already satisfied: htmldate&gt;=1.10.0 in c:\alisha\ppw\enwebmining\lib\site-packages (from trafilatura) (1.10.0)
+Requirement already satisfied: justext&gt;=3.0.2 in c:\alisha\ppw\enwebmining\lib\site-packages (from trafilatura) (3.0.2)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.26 in c:\alisha\ppw\enwebmining\lib\site-packages (from trafilatura) (2.7.0)
+Requirement already satisfied: charset_normalizer&gt;=3.4.9 in c:\alisha\ppw\enwebmining\lib\site-packages (from trafilatura) (3.5.1)
+Requirement already satisfied: certifi in c:\alisha\ppw\enwebmining\lib\site-packages (from trafilatura) (2026.7.22)
+Requirement already satisfied: tld&gt;=0.13 in c:\alisha\ppw\enwebmining\lib\site-packages (from courlan&gt;=1.4.0-&gt;trafilatura) (0.13.2)
+Requirement already satisfied: babel&gt;=2.16.0 in c:\alisha\ppw\enwebmining\lib\site-packages (from courlan&gt;=1.4.0-&gt;trafilatura) (2.18.0)
+Requirement already satisfied: dateparser&gt;=1.1.2 in c:\alisha\ppw\enwebmining\lib\site-packages (from htmldate&gt;=1.10.0-&gt;trafilatura) (1.4.2)
+Requirement already satisfied: python-dateutil&gt;=2.9.0.post0 in c:\alisha\ppw\enwebmining\lib\site-packages (from htmldate&gt;=1.10.0-&gt;trafilatura) (2.9.0.post0)
+Requirement already satisfied: regex&gt;=2024.9.11 in c:\alisha\ppw\enwebmining\lib\site-packages (from dateparser&gt;=1.1.2-&gt;htmldate&gt;=1.10.0-&gt;trafilatura) (2026.9.3)
+Requirement already satisfied: pytz&gt;=2024.2 in c:\alisha\ppw\enwebmining\lib\site-packages (from dateparser&gt;=1.1.2-&gt;htmldate&gt;=1.10.0-&gt;trafilatura) (2026.3.post1)
+Requirement already satisfied: tzlocal&gt;=0.2 in c:\alisha\ppw\enwebmining\lib\site-packages (from dateparser&gt;=1.1.2-&gt;htmldate&gt;=1.10.0-&gt;trafilatura) (5.4.4)
+Requirement already satisfied: six&gt;=1.5 in c:\alisha\ppw\enwebmining\lib\site-packages (from python-dateutil&gt;=2.9.0.post0-&gt;htmldate&gt;=1.10.0-&gt;trafilatura) (1.17.0)
+Requirement already satisfied: tzdata in c:\alisha\ppw\enwebmining\lib\site-packages (from tzlocal&gt;=0.2-&gt;dateparser&gt;=1.1.2-&gt;htmldate&gt;=1.10.0-&gt;trafilatura) (2026.3)
+Installing collected packages: lxml_html_clean
+Successfully installed lxml_html_clean-0.4.5
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: lxml 6.1.3 does not provide the extra 'html_clean'
+
+[notice] A new release of pip available: 22.2.1 -&gt; 26.2.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">trafilatura</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="fungsi-ekstraksi-isi-artikel">
+<h2>1. Fungsi Ekstraksi Isi Artikel<a class="headerlink" href="#fungsi-ekstraksi-isi-artikel" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">trafilatura.fetch_url()</span></code> terkadang mengembalikan HTML yang tidak sesuai dari server Detik. Solusi yang stabil: mengambil HTML sendiri menggunakan <code class="docutils literal notranslate"><span class="pre">requests</span></code>, baru diteruskan ke <code class="docutils literal notranslate"><span class="pre">trafilatura.extract()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ambil_isi_berita</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Mengambil isi utama sebuah artikel berita dari URL menggunakan requests + trafilatura."""</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">"User-Agent"</span><span class="p">:</span> <span class="s2">"Mozilla/5.0"</span><span class="p">},</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">teks</span> <span class="o">=</span> <span class="n">trafilatura</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">teks</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="demonstrasi-html-mentah-vs-hasil-ekstraksi">
+<h3>Demonstrasi: HTML Mentah vs Hasil Ekstraksi<a class="headerlink" href="#demonstrasi-html-mentah-vs-hasil-ekstraksi" title="Link to this heading">#</a></h3>
+<p>Berikut perbandingan antara HTML mentah sebuah halaman artikel dengan hasil ekstraksi menggunakan Trafilatura, untuk menunjukkan bahwa proses ekstraksi benar-benar menyaring konten utama dari elemen-elemen lain seperti menu, iklan, dan navigasi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url_demo</span> <span class="o">=</span> <span class="s2">"https://sport.detik.com/moto-gp/d-8652587/motogp-san-marino-antusiasme-bezzecchi-balapan-di-rumah-sendiri"</span>
+
+<span class="n">resp_demo</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url_demo</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">"User-Agent"</span><span class="p">:</span> <span class="s2">"Mozilla/5.0"</span><span class="p">},</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">html_mentah</span> <span class="o">=</span> <span class="n">resp_demo</span><span class="o">.</span><span class="n">text</span>
+<span class="n">isi_bersih</span> <span class="o">=</span> <span class="n">trafilatura</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">html_mentah</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url_demo</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--- HTML MENTAH (potongan 500 karakter pertama) ---"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">html_mentah</span><span class="p">[:</span><span class="mi">500</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Total panjang HTML mentah: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">html_mentah</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> karakter</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--- HASIL EKSTRAKSI TRAFILATURA (potongan 500 karakter pertama) ---"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">isi_bersih</span><span class="p">[:</span><span class="mi">500</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Total panjang hasil ekstraksi: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">isi_bersih</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> karakter"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- HTML MENTAH (potongan 500 karakter pertama) ---
+&lt;!DOCTYPE html&gt;
+&lt;html lang="id-ID"&gt;
+    &lt;head&gt;
+        &lt;script type="text/javascript" src="https://iat.detiknetwork.com/ip-information.js"&gt;&lt;/script&gt;
+        &lt;link rel="preconnect" href="https://awscdn.detik.net.id"&gt;&lt;link rel="preconnect" href="https://awscdn.detik.net.id" crossorigin&gt;&lt;link rel="preconnect" href="https://cdn.detik.net.id"&gt;&lt;link rel="preconnect" href="https://cdn.detik.net.id" crossorigin&gt;        &lt;link rel="dns-prefetch" href="https://cdn.detik.net.id"/&gt;&lt;link rel="dns-prefetch" h
+
+Total panjang HTML mentah: 251,384 karakter
+
+--- HASIL EKSTRAKSI TRAFILATURA (potongan 500 karakter pertama) ---
+Marco Bezzecchi tak sabar menghadapi MotoGP San Marino 2026. Bagi pebalap Aprilia itu, balapan di Sirkuit Misano punya arti khusus karena lokasinya sangat dekat dengan kampung halamannya, Rimini.
+MotoGP San Marino akan berlangsung di Misano pada 11-13 September. Bezzecchi menyebut seri ini selalu terasa berbeda dibandingkan balapan lainnya.
+"Grand Prix kandang selalu memiliki sesuatu yang ajaib dan spesial," kata Bezzecchi seperti dilansir Motosan.
+Misano memang seperti rumah kedua bagi Bezzecch
+
+Total panjang hasil ekstraksi: 1,832 karakter
+</pre></div>
+</div>
+</div>
+</div>
+<p>Terlihat jelas bahwa HTML mentah (~250.000+ karakter) mengandung banyak kode markup, skrip, dan elemen navigasi yang tidak relevan, sedangkan hasil ekstraksi Trafilatura (~1.800 karakter) hanya berisi teks inti artikel yang siap digunakan untuk analisis.</p>
+</section>
+</section>
+<section id="fungsi-pengumpulan-url-artikel">
+<h2>2. Fungsi Pengumpulan URL Artikel<a class="headerlink" href="#fungsi-pengumpulan-url-artikel" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="http://Detik.com">Detik.com</a> menyediakan halaman indeks kategori (contoh: <code class="docutils literal notranslate"><span class="pre">sport.detik.com/indeks</span></code>) yang dapat dipaginasi dengan parameter <code class="docutils literal notranslate"><span class="pre">?page=N</span></code>. Semua tautan artikel mengikuti pola <code class="docutils literal notranslate"><span class="pre">https://&lt;subdomain&gt;.detik.com/&lt;subkanal&gt;/d-&lt;nomor&gt;/&lt;judul-slug&gt;</span></code>, sehingga dapat diambil otomatis menggunakan regex.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ambil_url_dari_halaman_index</span><span class="p">(</span><span class="n">halaman_url</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Mengambil semua URL artikel dari 1 halaman index Detik."""</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">halaman_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">"User-Agent"</span><span class="p">:</span> <span class="s2">"Mozilla/5.0"</span><span class="p">},</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">pola</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"https://[a-z]+\.detik\.com/[a-z0-9-]+/d-\d+/[a-z0-9-]+"</span>
+    <span class="n">urls</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pola</span><span class="p">,</span> <span class="n">html</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">urls</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">kumpulkan_url_kategori</span><span class="p">(</span><span class="n">base_index_url</span><span class="p">,</span> <span class="n">target_jumlah</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_halaman</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Mengumpulkan URL artikel dari banyak halaman index sampai mencapai target_jumlah."""</span>
+    <span class="n">semua_url</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">halaman</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">semua_url</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">target_jumlah</span> <span class="ow">and</span> <span class="n">halaman</span> <span class="o">&lt;=</span> <span class="n">max_halaman</span><span class="p">:</span>
+        <span class="n">url_halaman</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_index_url</span><span class="si">}</span><span class="s2">?page=</span><span class="si">{</span><span class="n">halaman</span><span class="si">}</span><span class="s2">"</span>
+        <span class="n">url_baru</span> <span class="o">=</span> <span class="n">ambil_url_dari_halaman_index</span><span class="p">(</span><span class="n">url_halaman</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">url_baru</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">u</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">semua_url</span><span class="p">:</span>
+                <span class="n">semua_url</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">halaman</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">semua_url</span><span class="p">[:</span><span class="n">target_jumlah</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="proses-crawling-penyusunan-dataset">
+<h2>3. Proses Crawling &amp; Penyusunan Dataset<a class="headerlink" href="#proses-crawling-penyusunan-dataset" title="Link to this heading">#</a></h2>
+<p>Untuk menghindari crawling berulang yang membebani server <a class="reference external" href="http://Detik.com">Detik.com</a>, proses ini menggunakan flag <code class="docutils literal notranslate"><span class="pre">_re_crawl</span></code>. Jika <code class="docutils literal notranslate"><span class="pre">False</span></code> (default), notebook akan memuat dataset yang sudah tersimpan di <code class="docutils literal notranslate"><span class="pre">data/dataset_berita_200.xlsx</span></code>. Jika ingin menjalankan ulang crawling dari awal, ubah menjadi <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_re_crawl</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># ubah ke True jika ingin crawling ulang dari awal</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">crawl_kategori</span><span class="p">(</span><span class="n">base_index_url</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">target_jumlah</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Crawling penuh 1 kategori: kumpulkan URL, ekstrak isi, beri label."""</span>
+    <span class="n">urls</span> <span class="o">=</span> <span class="n">kumpulkan_url_kategori</span><span class="p">(</span><span class="n">base_index_url</span><span class="p">,</span> <span class="n">target_jumlah</span><span class="p">)</span>
+    <span class="n">hasil</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">gagal</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+        <span class="n">isi</span> <span class="o">=</span> <span class="n">ambil_isi_berita</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">isi</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">isi</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="n">hasil</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"isi_berita"</span><span class="p">:</span> <span class="n">isi</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span> <span class="s2">"url"</span><span class="p">:</span> <span class="n">u</span><span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">gagal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># retry sekali untuk yang gagal</span>
+    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">gagal</span><span class="p">[:]:</span>
+        <span class="n">isi</span> <span class="o">=</span> <span class="n">ambil_isi_berita</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">isi</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">isi</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="n">hasil</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"isi_berita"</span><span class="p">:</span> <span class="n">isi</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span> <span class="s2">"url"</span><span class="p">:</span> <span class="n">u</span><span class="p">})</span>
+            <span class="n">gagal</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">hasil</span><span class="p">,</span> <span class="n">gagal</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="o">!{</span>sys.executable<span class="o">}</span><span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>openpyxl
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting openpyxl
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[notice] A new release of pip available: 22.2.1 -&gt; 26.2.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading openpyxl-3.1.5-py2.py3-none-any.whl (250 kB)
+     -------------------------------------- 250.9/250.9 kB 1.7 MB/s eta 0:00:00
+Collecting et-xmlfile
+  Downloading et_xmlfile-2.0.0-py3-none-any.whl (18 kB)
+Installing collected packages: et-xmlfile, openpyxl
+Successfully installed et-xmlfile-2.0.0 openpyxl-3.1.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">_re_crawl</span><span class="p">:</span>
+    <span class="n">data_sport</span><span class="p">,</span> <span class="n">gagal_sport</span> <span class="o">=</span> <span class="n">crawl_kategori</span><span class="p">(</span><span class="s2">"https://sport.detik.com/indeks"</span><span class="p">,</span> <span class="s2">"sport"</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">data_finance</span><span class="p">,</span> <span class="n">gagal_finance</span> <span class="o">=</span> <span class="n">crawl_kategori</span><span class="p">(</span><span class="s2">"https://finance.detik.com/indeks"</span><span class="p">,</span> <span class="s2">"finance"</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_sport</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"id"</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="s2">"isi_berita"</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s2">"isi_berita"</span><span class="p">],</span> <span class="s2">"label"</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s2">"label"</span><span class="p">],</span> <span class="s2">"url"</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s2">"url"</span><span class="p">]})</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_finance</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">101</span><span class="p">):</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"id"</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="s2">"isi_berita"</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s2">"isi_berita"</span><span class="p">],</span> <span class="s2">"label"</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s2">"label"</span><span class="p">],</span> <span class="s2">"url"</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s2">"url"</span><span class="p">]})</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">"../data/dataset_berita_200.xlsx"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Crawling selesai, dataset baru disimpan."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">"../data/dataset_berita_200.xlsx"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Dataset dimuat dari file tersimpan (tidak melakukan crawling ulang)."</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Total baris:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset dimuat dari file tersimpan (tidak melakukan crawling ulang).
+Total baris: 200
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>isi_berita</th>
+      <th>label</th>
+      <th>url</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Chef de Mission (CdM) Indonesia Todotua Pasari...</td>
+      <td>sport</td>
+      <td>https://sport.detik.com/sport-lain/d-8655308/c...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Banjir besar melanda Nagoya, Jepang, menjelang...</td>
+      <td>sport</td>
+      <td>https://sport.detik.com/sport-lain/d-8655303/a...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Ketua Umum Komite Olimpiade Indonesia (KOI) Ra...</td>
+      <td>sport</td>
+      <td>https://sport.detik.com/sport-lain/d-8655067/k...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="validasi-dataset-akhir">
+<h2>4. Validasi Dataset Akhir<a class="headerlink" href="#validasi-dataset-akhir" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">"Total baris harus 200"</span>
+<span class="k">assert</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"sport"</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">"Jumlah sport harus 100"</span>
+<span class="k">assert</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"finance"</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">"Jumlah finance harus 100"</span>
+<span class="k">assert</span> <span class="n">df</span><span class="p">[</span><span class="s2">"isi_berita"</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"Tidak boleh ada isi_berita kosong"</span>
+<span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"isi_berita"</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">,</span> <span class="s2">"url"</span><span class="p">],</span> <span class="s2">"Skema kolom harus id, isi_berita, label, url"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Semua validasi lolos. Dataset siap digunakan untuk tahap Modeling."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Semua validasi lolos. Dataset siap digunakan untuk tahap Modeling.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "enwebmining"
+        },
+        kernelOptions: {
+            name: "enwebmining",
+            path: "./CRISP-DM"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'enwebmining'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="EDA.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Understanding</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Modeling.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Modeling</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fungsi-ekstraksi-isi-artikel">1. Fungsi Ekstraksi Isi Artikel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstrasi-html-mentah-vs-hasil-ekstraksi">Demonstrasi: HTML Mentah vs Hasil Ekstraksi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fungsi-pengumpulan-url-artikel">2. Fungsi Pengumpulan URL Artikel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-crawling-penyusunan-dataset">3. Proses Crawling &amp; Penyusunan Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validasi-dataset-akhir">4. Validasi Dataset Akhir</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hanin Hammoud
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
