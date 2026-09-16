@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Digunakan untuk membaca data &#8212; PPW - Web Search &amp; Mining</title>
+    <title>Data Prepocessing &#8212; PPW - Web Search &amp; Mining</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -185,25 +185,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Business.html">Business Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="EDA.html">Data Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Input.html">Data Preparation</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Digunakan untuk membaca data</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Prepocessing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Modeling.html">Modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Output.html">Evaluation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Production.html">Deployment</a></li>
@@ -360,7 +342,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Digunakan untuk membaca data</h1>
+    <h1>Data Prepocessing</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -370,27 +352,26 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Digunakan untuk membaca data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#menghapus-tanda-baca-di-dalam-dokumen">Menghapus Tanda Baca Di Dalam Dokumen</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-kata-tidak-baku">Normalisasi Kata Tidak Baku</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-bahasa-asing-menjadi-bahasa-indonesia">Mengubah Bahasa Asing menjadi Bahasa Indonesia</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mengextrak-kata-yang-ada-dalam-berita">Mengextrak kata Yang Ada Dalam Berita</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-label">Mengubah Label</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf">TF IDF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-matrix">Menampilkan matrix</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#menyimpan-data-tf-idf">Menyimpan data TF IDF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-x-icsdf">TF IDF X ICSDF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-kata-paling-penting">Menentukan Kata Paling Penting</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reduksi-menjadi-100-fitur-icsdf">Reduksi Menjadi 100 Fitur ICSDF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-hasil-icsdf">Tabel Hasil ICSDF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pca">PCA</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-tabel-data-reduksi-training">Membuat tabel data reduksi training</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-testing">Data Testing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-data-reduksi">Simpan Data Reduksi</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#total-training-dan-testing">Total Training Dan Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#digunakan-untuk-membaca-data">1. Digunakan untuk membaca data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menghapus-tanda-baca-di-dalam-dokumen">Menghapus Tanda Baca Di Dalam Dokumen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-kata-tidak-baku">Normalisasi Kata Tidak Baku</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-bahasa-asing-menjadi-bahasa-indonesia">Mengubah Bahasa Asing menjadi Bahasa Indonesia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengextrak-kata-yang-ada-dalam-berita">Mengextrak kata Yang Ada Dalam Berita</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-label">Mengubah Label</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf">TF IDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-matrix">Menampilkan matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menyimpan-data-tf-idf">Menyimpan data TF IDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-x-icsdf">TF IDF X ICSDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-kata-paling-penting">Menentukan Kata Paling Penting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduksi-menjadi-100-fitur-icsdf">Reduksi Menjadi 100 Fitur ICSDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-hasil-icsdf">Tabel Hasil ICSDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca">PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-tabel-data-reduksi-training">Membuat tabel data reduksi training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-testing">Data Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-data-reduksi">Simpan Data Reduksi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-training-dan-testing">Total Training Dan Testing</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -401,8 +382,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="digunakan-untuk-membaca-data">
-<h1>Digunakan untuk membaca data<a class="headerlink" href="#digunakan-untuk-membaca-data" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="data-prepocessing">
+<h1>Data Prepocessing<a class="headerlink" href="#data-prepocessing" title="Link to this heading">#</a></h1>
+<section id="digunakan-untuk-membaca-data">
+<h2>1. Digunakan untuk membaca data<a class="headerlink" href="#digunakan-untuk-membaca-data" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -505,7 +488,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="menghapus-tanda-baca-di-dalam-dokumen">
-<h1>Menghapus Tanda Baca Di Dalam Dokumen<a class="headerlink" href="#menghapus-tanda-baca-di-dalam-dokumen" title="Link to this heading">#</a></h1>
+<h2>Menghapus Tanda Baca Di Dalam Dokumen<a class="headerlink" href="#menghapus-tanda-baca-di-dalam-dokumen" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
@@ -589,7 +572,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="normalisasi-kata-tidak-baku">
-<h1>Normalisasi Kata Tidak Baku<a class="headerlink" href="#normalisasi-kata-tidak-baku" title="Link to this heading">#</a></h1>
+<h2>Normalisasi Kata Tidak Baku<a class="headerlink" href="#normalisasi-kata-tidak-baku" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
@@ -868,7 +851,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="mengubah-bahasa-asing-menjadi-bahasa-indonesia">
-<h1>Mengubah Bahasa Asing menjadi Bahasa Indonesia<a class="headerlink" href="#mengubah-bahasa-asing-menjadi-bahasa-indonesia" title="Link to this heading">#</a></h1>
+<h2>Mengubah Bahasa Asing menjadi Bahasa Indonesia<a class="headerlink" href="#mengubah-bahasa-asing-menjadi-bahasa-indonesia" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kamus_asing</span> <span class="o">=</span> <span class="p">{</span>
@@ -1004,7 +987,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="mengextrak-kata-yang-ada-dalam-berita">
-<h1>Mengextrak kata Yang Ada Dalam Berita<a class="headerlink" href="#mengextrak-kata-yang-ada-dalam-berita" title="Link to this heading">#</a></h1>
+<h2>Mengextrak kata Yang Ada Dalam Berita<a class="headerlink" href="#mengextrak-kata-yang-ada-dalam-berita" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================</span>
@@ -1161,7 +1144,7 @@ Selisih jumlah kata              : 2669
 </div>
 </section>
 <section id="mengubah-label">
-<h1>Mengubah Label<a class="headerlink" href="#mengubah-label" title="Link to this heading">#</a></h1>
+<h2>Mengubah Label<a class="headerlink" href="#mengubah-label" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">"label_num"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">({</span>
@@ -1721,7 +1704,7 @@ Jumlah kata unik: 5509
 </div>
 </section>
 <section id="testing">
-<h1>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h1>
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
@@ -1795,7 +1778,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="tf-idf">
-<h1>TF IDF<a class="headerlink" href="#tf-idf" title="Link to this heading">#</a></h1>
+<h2>TF IDF<a class="headerlink" href="#tf-idf" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfidf</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span>
@@ -1833,7 +1816,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="menampilkan-matrix">
-<h1>Menampilkan matrix<a class="headerlink" href="#menampilkan-matrix" title="Link to this heading">#</a></h1>
+<h2>Menampilkan matrix<a class="headerlink" href="#menampilkan-matrix" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfidf_train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
@@ -2015,7 +1998,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="menyimpan-data-tf-idf">
-<h1>Menyimpan data TF IDF<a class="headerlink" href="#menyimpan-data-tf-idf" title="Link to this heading">#</a></h1>
+<h2>Menyimpan data TF IDF<a class="headerlink" href="#menyimpan-data-tf-idf" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfidf_train_df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span>
@@ -2269,7 +2252,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="tf-idf-x-icsdf">
-<h1>TF IDF X ICSDF<a class="headerlink" href="#tf-idf-x-icsdf" title="Link to this heading">#</a></h1>
+<h2>TF IDF X ICSDF<a class="headerlink" href="#tf-idf-x-icsdf" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_icsdf</span> <span class="o">=</span> <span class="n">X_train_tfidf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span>
@@ -2299,7 +2282,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="menentukan-kata-paling-penting">
-<h1>Menentukan Kata Paling Penting<a class="headerlink" href="#menentukan-kata-paling-penting" title="Link to this heading">#</a></h1>
+<h2>Menentukan Kata Paling Penting<a class="headerlink" href="#menentukan-kata-paling-penting" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">skor_fitur</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span>
@@ -2542,7 +2525,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="reduksi-menjadi-100-fitur-icsdf">
-<h1>Reduksi Menjadi 100 Fitur ICSDF<a class="headerlink" href="#reduksi-menjadi-100-fitur-icsdf" title="Link to this heading">#</a></h1>
+<h2>Reduksi Menjadi 100 Fitur ICSDF<a class="headerlink" href="#reduksi-menjadi-100-fitur-icsdf" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_selected</span> <span class="o">=</span> <span class="n">X_train_icsdf</span><span class="p">[</span>
@@ -2581,7 +2564,7 @@ Sesudah ICSDF: (160, 100)
 </div>
 </section>
 <section id="tabel-hasil-icsdf">
-<h1>Tabel Hasil ICSDF<a class="headerlink" href="#tabel-hasil-icsdf" title="Link to this heading">#</a></h1>
+<h2>Tabel Hasil ICSDF<a class="headerlink" href="#tabel-hasil-icsdf" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">icsdf_train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
@@ -2782,7 +2765,7 @@ Sesudah ICSDF: (160, 100)
 </div>
 </section>
 <section id="pca">
-<h1>PCA<a class="headerlink" href="#pca" title="Link to this heading">#</a></h1>
+<h2>PCA<a class="headerlink" href="#pca" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
@@ -2843,7 +2826,7 @@ Sesudah ICSDF: (160, 100)
 </div>
 </section>
 <section id="membuat-tabel-data-reduksi-training">
-<h1>Membuat tabel data reduksi training<a class="headerlink" href="#membuat-tabel-data-reduksi-training" title="Link to this heading">#</a></h1>
+<h2>Membuat tabel data reduksi training<a class="headerlink" href="#membuat-tabel-data-reduksi-training" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nama_pc</span> <span class="o">=</span> <span class="p">[</span>
@@ -3047,7 +3030,7 @@ Sesudah ICSDF: (160, 100)
 </div>
 </section>
 <section id="data-testing">
-<h1>Data Testing<a class="headerlink" href="#data-testing" title="Link to this heading">#</a></h1>
+<h2>Data Testing<a class="headerlink" href="#data-testing" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_test_reduksi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
@@ -3238,7 +3221,7 @@ Sesudah ICSDF: (160, 100)
 </div>
 </section>
 <section id="simpan-data-reduksi">
-<h1>Simpan Data Reduksi<a class="headerlink" href="#simpan-data-reduksi" title="Link to this heading">#</a></h1>
+<h2>Simpan Data Reduksi<a class="headerlink" href="#simpan-data-reduksi" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_train_reduksi</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span>
@@ -3256,7 +3239,7 @@ Sesudah ICSDF: (160, 100)
 </div>
 </section>
 <section id="total-training-dan-testing">
-<h1>Total Training Dan Testing<a class="headerlink" href="#total-training-dan-testing" title="Link to this heading">#</a></h1>
+<h2>Total Training Dan Testing<a class="headerlink" href="#total-training-dan-testing" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
@@ -3293,6 +3276,7 @@ Testing : (40, 21)
 </div>
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -3359,27 +3343,26 @@ Testing : (40, 21)
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Digunakan untuk membaca data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#menghapus-tanda-baca-di-dalam-dokumen">Menghapus Tanda Baca Di Dalam Dokumen</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-kata-tidak-baku">Normalisasi Kata Tidak Baku</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-bahasa-asing-menjadi-bahasa-indonesia">Mengubah Bahasa Asing menjadi Bahasa Indonesia</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mengextrak-kata-yang-ada-dalam-berita">Mengextrak kata Yang Ada Dalam Berita</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-label">Mengubah Label</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf">TF IDF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-matrix">Menampilkan matrix</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#menyimpan-data-tf-idf">Menyimpan data TF IDF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-x-icsdf">TF IDF X ICSDF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-kata-paling-penting">Menentukan Kata Paling Penting</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reduksi-menjadi-100-fitur-icsdf">Reduksi Menjadi 100 Fitur ICSDF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-hasil-icsdf">Tabel Hasil ICSDF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pca">PCA</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-tabel-data-reduksi-training">Membuat tabel data reduksi training</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-testing">Data Testing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-data-reduksi">Simpan Data Reduksi</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#total-training-dan-testing">Total Training Dan Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#digunakan-untuk-membaca-data">1. Digunakan untuk membaca data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menghapus-tanda-baca-di-dalam-dokumen">Menghapus Tanda Baca Di Dalam Dokumen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-kata-tidak-baku">Normalisasi Kata Tidak Baku</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-bahasa-asing-menjadi-bahasa-indonesia">Mengubah Bahasa Asing menjadi Bahasa Indonesia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengextrak-kata-yang-ada-dalam-berita">Mengextrak kata Yang Ada Dalam Berita</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-label">Mengubah Label</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf">TF IDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-matrix">Menampilkan matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menyimpan-data-tf-idf">Menyimpan data TF IDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-x-icsdf">TF IDF X ICSDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-kata-paling-penting">Menentukan Kata Paling Penting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduksi-menjadi-100-fitur-icsdf">Reduksi Menjadi 100 Fitur ICSDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-hasil-icsdf">Tabel Hasil ICSDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca">PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-tabel-data-reduksi-training">Membuat tabel data reduksi training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-testing">Data Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-data-reduksi">Simpan Data Reduksi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-training-dan-testing">Total Training Dan Testing</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
