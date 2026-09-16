@@ -1,0 +1,20 @@
+### Pengantar Web Mining
+
+**Apa itu Web Mining?**
+Web mining digunakan untuk menemukan informasi yang berguna atau pengetahuan dari web hyperlink structure, page content dan usage data. Walaupun web mining menggunakan teknik data mining seperti yang telah disebutkan tetapi tidak murni seluruhnya karena heterogen dan semi terstruktur dan tidak terstrukturnya data web. Berdasarkan tugas pokok yang dilakukan dalam proses menambang, web mining dapat kelompokkan menjadi tiga bentuk, yaitu Web Structure Mining, Web Content Mining, dan Web Usage Mining
+
+- Web struktur Mining
+Web structure mining adalah tugas untuk menemukan pengetahuan yang bermanfaat dari hyperlink (atau link singkatnya), yang menyatakan struktur dari dari web. Misalkan dari link-link kita dapat menemukan web page penting, yang menjadi teknologi utama yang digunakan dalam mesin pencarian. Kita dapat juga menemukan komunitas dalam media sosial. Datamining biasa tidak melakukan tugas tersebut, karena tidak ada struktur link dalam tabel tradisional.
+
+- Web Content Mining
+Web content mining adalah mengektrak atau menambang informasi yang berguna atau pengetahuan dari isi halam web. Misalkan kita dapat secara otomatis mengklasifikasikan dan mengelompokkan halam wen sesuai deng topiknya. Tugas ini sama dengan data mining biasa. Akan tetapi kita juga dapat menemukan pla dalam web site untuk mengektrak data yang berguna seperti deskripsi produk, postingan forum, dan lain sebagainya untuk banyak tujuan. Selanjutnya kita dapa menambang ulasan dan postingan dari forum untuk menemukan opini konsumen. Disin tidak ada pada data mining tradisional.
+
+**Apa itu web scraping?**
+proses mengektrak data dari website. Selanjutnya data yang tersedia di website dinyatakan dalam bentuk format yang dapat dengan mudah dioleh oleh mesin untuk dianalisa lebih lanjut. Misalkan data dinyatakan dalam bentuk format CSV, disimpan dalam database tertentu dan sebagainya. Data yang ada di website itu bentuknya tidak terstrukur, artinya tidak siap digunakan untuk analisis. Ada beberapa cara scrape data dari website untuk diektrak informasinya untuk digunakan. Bentuk yang paling sederhana, adalah dengan menyalin dan mempast bagian bagian tersebut dari website. TEntunya ini tidak praktis dilakukan jika banyak data yang yang akan diektrak, atau tersebar dibeberapa website. Sehingga diperlukan tool khusus dan teknik khusus yang digunakan untuk melakukan secara otomatis proses ini, dengan menetapkan webiste yang akan dijelajahi informasi apa yang akan dicari dan apakah ektraksi data berhenti diakhir halama yang ditemukan ataukah mengikuti hyperlink dan mengulangi proses secara rekursif. Proses automatis dari web scraping juga memungkinkan untuk dilakukan apakah proses akan dijalankan pada rentang waktu tertentu dan menangkap perubahan yang terjadi dari data. Teknik Webscraping membutuhkan pemahaman teknologi yang digunakan untuk menampilkan inforamasi pada web. Oleh karena itu diperlukan pemahaman tentang HTML dan Document Object Model (DOM) termasuk pemahana sintak XPath untuk memilih elemen pada website.
+
+untuk Apa web scraping diperlukan?
+
+- Untuk web indexing yang digunakan oleh mesin pencari misal Google untuk menganalisa secara masal web untuk membangun indeknya.
+
+Memonitoring perubahan data e-commerse secara online untuk tujuan pemasaran.
+Seandainya kita telah memiliki toko penjualan sepatu dan ingin untuk melacak terus harga pesaing kita. Kita dapat mengunjungi website pesaing kita setiap hari untuk membandingkan dengan masing masing harga sepatu yang kita miliki. Akan tetapi ini akan butuh waktu banyak dan tidak layak dilakukan jika kita menjual ribuan sepatu atau dibutuhkan untuk mengecek perubahan harga lebih sering. Ini adalah pekerjaan yang tidak efisien dan efektif . Oleh karena itu kita perlu mesin atomatis dengan teknik web scraping untuk menggantikan proses manual tersebut.
