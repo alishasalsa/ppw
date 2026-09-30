@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'CRISP-DM/preprocessing';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Modeling" href="Modeling.html" />
+    <link rel="next" title="Word Embedding: Skip-gram" href="Skipgram.html" />
     <link rel="prev" title="Data Preparation" href="Input.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -186,7 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="EDA.html">Data Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Input.html">Data Preparation</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Prepocessing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Modeling.html">Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Skipgram.html">Skipgram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Output.html">Evaluation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Production.html">Deployment</a></li>
 </ul>
@@ -1288,8 +1288,8 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 200/200 [00:00&lt;00:00, 889.10it/s] 
-100%|██████████| 200/200 [07:22&lt;00:00,  2.21s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 200/200 [00:00&lt;00:00, 1942.25it/s]
+100%|██████████| 200/200 [07:36&lt;00:00,  2.28s/it]
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1723,39 +1723,39 @@ Jumlah kata unik: 5509
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from sklearn.model_selection import train_test_split</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_text</span><span class="p">,</span> <span class="n">X_test_text</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># X_train_text, X_test_text, y_train, y_test = train_test_split(</span>
 
-    <span class="n">df</span><span class="p">[</span><span class="s2">"isi_berita_clean"</span><span class="p">],</span>
-    <span class="n">df</span><span class="p">[</span><span class="s2">"label_num"</span><span class="p">],</span>
+<span class="c1">#     df["isi_berita_clean"],</span>
+<span class="c1">#     df["label_num"],</span>
 
-    <span class="n">test_size</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+<span class="c1">#     test_size=40,</span>
 
-    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+<span class="c1">#     random_state=42,</span>
 
-    <span class="n">stratify</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">"label_num"</span><span class="p">]</span>
-<span class="p">)</span>
+<span class="c1">#     stratify=df["label_num"]</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
-    <span class="s2">"Jumlah training:"</span><span class="p">,</span>
-    <span class="nb">len</span><span class="p">(</span><span class="n">X_train_text</span><span class="p">)</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print(</span>
+<span class="c1">#     "Jumlah training:",</span>
+<span class="c1">#     len(X_train_text)</span>
+<span class="c1"># )</span>
 
-<span class="nb">print</span><span class="p">(</span>
-    <span class="s2">"Jumlah testing:"</span><span class="p">,</span>
-    <span class="nb">len</span><span class="p">(</span><span class="n">X_test_text</span><span class="p">)</span>
-<span class="p">)</span>
+<span class="c1"># print(</span>
+<span class="c1">#     "Jumlah testing:",</span>
+<span class="c1">#     len(X_test_text)</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
@@ -1768,11 +1768,11 @@ Jumlah testing: 40
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"TRAINING"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print("TRAINING")</span>
+<span class="c1"># print(y_train.value_counts())</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">TESTING"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="c1"># print("\nTESTING")</span>
+<span class="c1"># print(y_test.value_counts())</span>
 </pre></div>
 </div>
 </div>
@@ -1799,35 +1799,43 @@ Name: count, dtype: int64
 <p>Selain mengubah teks menjadi angka berdasarkan bobot kepentingan kata, kode ini juga secara otomatis menyaring kosa kata, yaitu membuang kata yang terlalu jarang muncul (muncul di kurang dari 2 berita) dan kata yang terlalu sering muncul (muncul di lebih dari 95% berita). Pola kosa kata ini dipelajari dari data latih (train), lalu diterapkan untuk mengubah data latih dan data uji (test) ke dalam bentuk angka.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfidf</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span>
-    <span class="n">min_df</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-    <span class="n">max_df</span><span class="o">=</span><span class="mf">0.95</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># tfidf = TfidfVectorizer(</span>
+<span class="c1">#     min_df=2,</span>
+<span class="c1">#     max_df=0.95</span>
+<span class="c1"># )</span>
 
-<span class="n">X_train_tfidf</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span>
-    <span class="n">X_train_text</span>
-<span class="p">)</span>
+<span class="c1"># X_train_tfidf = tfidf.fit_transform(</span>
+<span class="c1">#     X_train_text</span>
+<span class="c1"># )</span>
 
-<span class="n">X_test_tfidf</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
-    <span class="n">X_test_text</span>
-<span class="p">)</span>
+<span class="c1"># X_test_tfidf = tfidf.transform(</span>
+<span class="c1">#     X_test_text</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nama_fitur</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="nb">print</span><span class="p">(</span>
-    <span class="s2">"Jumlah fitur TF-IDF:"</span><span class="p">,</span>
-    <span class="nb">len</span><span class="p">(</span><span class="n">nama_fitur</span><span class="p">)</span>
-<span class="p">)</span>
+<span class="c1"># ============================================</span>
+<span class="c1"># TF-IDF pada SELURUH 200 data (tanpa split)</span>
+<span class="c1"># ============================================</span>
+<span class="n">tfidf</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"isi_berita_clean"</span><span class="p">])</span>
+<span class="n">nama_fitur</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Ukuran TF-IDF: </span><span class="si">{</span><span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Jumlah fitur: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">nama_fitur</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah fitur TF-IDF: 2355
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ukuran TF-IDF: (200, 5489)
+Jumlah fitur: 5489
 </pre></div>
 </div>
 </div>
@@ -1839,12 +1847,12 @@ Name: count, dtype: int64
 <p>Dalam tabel ini, setiap kolom mewakili satu kosa kata yang berhasil diekstrak dari berita, dan angka-angka di dalamnya menunjukkan nilai bobot kepentingan kata tersebut pada setiap berita. Setelah tabelnya dibuat, kode akan menampilkan cuplikan 5 baris pertamanya agar Anda bisa melihat langsung hasil dari pembobotan kata-kata tersebut.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfidf_train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="n">X_train_tfidf</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span>
-    <span class="n">columns</span><span class="o">=</span><span class="n">nama_fitur</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># tfidf_df = pd.DataFrame(</span>
+<span class="c1">#     tfidf_matrix.toarray(),</span>
+<span class="c1">#     columns=nama_fitur</span>
+<span class="c1"># )</span>
 
-<span class="n">tfidf_train_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="c1"># tfidf_df.head()</span>
 </pre></div>
 </div>
 </div>
@@ -1867,25 +1875,25 @@ Name: count, dtype: int64
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>aadi</th>
+      <th>aam</th>
+      <th>aan</th>
+      <th>aau</th>
+      <th>abadi</th>
+      <th>abalabal</th>
+      <th>abang</th>
+      <th>abangpalmerah</th>
+      <th>abdi</th>
       <th>abdul</th>
-      <th>absen</th>
-      <th>abu</th>
-      <th>acara</th>
-      <th>acdacd</th>
-      <th>aceh</th>
-      <th>acehsumut</th>
-      <th>acosta</th>
-      <th>acu</th>
-      <th>ada</th>
       <th>...</th>
-      <th>yogyakarta</th>
-      <th>youtube</th>
-      <th>yudhi</th>
-      <th>yusrian</th>
-      <th>yusuf</th>
-      <th>zapp</th>
+      <th>zenix</th>
+      <th>zero</th>
+      <th>zhang</th>
+      <th>zigmars</th>
       <th>zona</th>
       <th>zoom</th>
+      <th>zuhair</th>
+      <th>zulfikar</th>
       <th>zulhas</th>
       <th>zulkifli</th>
     </tr>
@@ -1895,17 +1903,17 @@ Name: count, dtype: int64
       <th>0</th>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.092565</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1919,17 +1927,17 @@ Name: count, dtype: int64
       <th>1</th>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.026569</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1943,17 +1951,17 @@ Name: count, dtype: int64
       <th>2</th>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.053152</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1967,17 +1975,17 @@ Name: count, dtype: int64
       <th>3</th>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.097905</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1991,17 +1999,17 @@ Name: count, dtype: int64
       <th>4</th>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.022178</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>0.065027</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2013,7 +2021,7 @@ Name: count, dtype: int64
     </tr>
   </tbody>
 </table>
-<p>5 rows × 2355 columns</p>
+<p>5 rows × 5489 columns</p>
 </div></div></div>
 </div>
 </section>
@@ -2023,124 +2031,124 @@ Name: count, dtype: int64
 <p>Pengaturan <code class="docutils literal notranslate"><span class="pre">index=False</span></code> digunakan untuk memastikan bahwa nomor urut baris bawaan dari sistem tidak ikut dimasukkan ke dalam file Excel tersebut, sehingga hasil akhirnya menjadi lebih rapi dan hanya berisi nama kolom/kata beserta nilai bobotnya saja.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfidf_train_df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span>
-    <span class="s2">"data_tfidf_training.xlsx"</span><span class="p">,</span>
-    <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># tfidf_df.to_excel(</span>
+<span class="c1">#     "data_tfidf.xlsx",</span>
+<span class="c1">#     index=False</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfidf_test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="n">X_test_tfidf</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span>
-    <span class="n">columns</span><span class="o">=</span><span class="n">nama_fitur</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># tfidf_test_df = pd.DataFrame(</span>
+<span class="c1">#     X_test_tfidf.toarray(),</span>
+<span class="c1">#     columns=nama_fitur</span>
+<span class="c1"># )</span>
 
-<span class="n">tfidf_test_df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_test</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span>
-    <span class="n">drop</span><span class="o">=</span><span class="kc">True</span>
-<span class="p">)</span>
+<span class="c1"># tfidf_test_df["label"] = y_test.reset_index(</span>
+<span class="c1">#     drop=True</span>
+<span class="c1"># )</span>
 
-<span class="n">tfidf_test_df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span>
-    <span class="s2">"data_tfidf_testing.xlsx"</span><span class="p">,</span>
-    <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
-<span class="p">)</span>
+<span class="c1"># tfidf_test_df.to_excel(</span>
+<span class="c1">#     "data_tfidf_testing.xlsx",</span>
+<span class="c1">#     index=False</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="n">features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-    <span class="n">tfidf</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import numpy as np</span>
+<span class="c1"># features = np.array(</span>
+<span class="c1">#     tfidf.get_feature_names_out()</span>
+<span class="c1"># )</span>
 
-<span class="n">jumlah_kelas</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+<span class="c1"># jumlah_kelas = y_train.nunique()</span>
 
-<span class="n">class_space_density</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
-    <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
-<span class="p">)</span>
+<span class="c1"># class_space_density = np.zeros(</span>
+<span class="c1">#     len(features)</span>
+<span class="c1"># )</span>
 
-<span class="n">y_train_array</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="c1"># y_train_array = y_train.to_numpy()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">kelas</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span>
-    <span class="n">y_train</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-<span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for kelas in sorted(</span>
+<span class="c1">#     y_train.unique()</span>
+<span class="c1"># ):</span>
 
-    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">y_train_array</span> <span class="o">==</span> <span class="n">kelas</span>
-    <span class="p">)</span>
+<span class="c1">#     mask = (</span>
+<span class="c1">#         y_train_array == kelas</span>
+<span class="c1">#     )</span>
 
-    <span class="n">X_class</span> <span class="o">=</span> <span class="n">X_train_tfidf</span><span class="p">[</span>
-        <span class="n">mask</span>
-    <span class="p">]</span>
-
-
-    <span class="c1"># Berapa dokumen kelas tersebut</span>
-    <span class="c1"># mengandung sebuah kata</span>
-
-    <span class="n">document_frequency_class</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="p">(</span><span class="n">X_class</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">A1</span>
-    <span class="p">)</span>
+<span class="c1">#     X_class = X_train_tfidf[</span>
+<span class="c1">#         mask</span>
+<span class="c1">#     ]</span>
 
 
-    <span class="n">jumlah_dokumen_class</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">X_class</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="p">)</span>
+<span class="c1">#     # Berapa dokumen kelas tersebut</span>
+<span class="c1">#     # mengandung sebuah kata</span>
+
+<span class="c1">#     document_frequency_class = (</span>
+<span class="c1">#         (X_class &gt; 0)</span>
+<span class="c1">#         .sum(axis=0)</span>
+<span class="c1">#         .A1</span>
+<span class="c1">#     )</span>
 
 
-    <span class="n">class_density</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">document_frequency_class</span>
-        <span class="o">/</span>
-        <span class="n">jumlah_dokumen_class</span>
-    <span class="p">)</span>
+<span class="c1">#     jumlah_dokumen_class = (</span>
+<span class="c1">#         X_class.shape[0]</span>
+<span class="c1">#     )</span>
 
 
-    <span class="n">class_space_density</span> <span class="o">+=</span> <span class="p">(</span>
-        <span class="n">class_density</span>
-    <span class="p">)</span>
+<span class="c1">#     class_density = (</span>
+<span class="c1">#         document_frequency_class</span>
+<span class="c1">#         /</span>
+<span class="c1">#         jumlah_dokumen_class</span>
+<span class="c1">#     )</span>
+
+
+<span class="c1">#     class_space_density += (</span>
+<span class="c1">#         class_density</span>
+<span class="c1">#     )</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-12</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># epsilon = 1e-12</span>
 
-<span class="n">icsdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+<span class="c1"># icsdf = np.log(</span>
 
-    <span class="p">(</span><span class="n">jumlah_kelas</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">)</span>
+<span class="c1">#     (jumlah_kelas + epsilon)</span>
 
-    <span class="o">/</span>
+<span class="c1">#     /</span>
 
-    <span class="p">(</span><span class="n">class_space_density</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">)</span>
-<span class="p">)</span>
+<span class="c1">#     (class_space_density + epsilon)</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_icsdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df_icsdf = pd.DataFrame({</span>
 
-    <span class="s2">"kata"</span><span class="p">:</span> <span class="n">features</span><span class="p">,</span>
+<span class="c1">#     "kata": features,</span>
 
-    <span class="s2">"ICSDF"</span><span class="p">:</span> <span class="n">icsdf</span>
-<span class="p">})</span>
+<span class="c1">#     "ICSDF": icsdf</span>
+<span class="c1"># })</span>
 
-<span class="n">df_icsdf</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
-    <span class="s2">"ICSDF"</span><span class="p">,</span>
-    <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span>
-<span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="c1"># df_icsdf.sort_values(</span>
+<span class="c1">#     "ICSDF",</span>
+<span class="c1">#     ascending=False</span>
+<span class="c1"># ).head(20)</span>
 </pre></div>
 </div>
 </div>
@@ -2277,27 +2285,27 @@ Name: count, dtype: int64
 <h2>12. TF IDF X ICSDF<a class="headerlink" href="#tf-idf-x-icsdf" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_icsdf</span> <span class="o">=</span> <span class="n">X_train_tfidf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span>
-    <span class="n">icsdf</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># X_train_icsdf = X_train_tfidf.multiply(</span>
+<span class="c1">#     icsdf</span>
+<span class="c1"># )</span>
 
-<span class="n">X_test_icsdf</span> <span class="o">=</span> <span class="n">X_test_tfidf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span>
-    <span class="n">icsdf</span>
-<span class="p">)</span>
+<span class="c1"># X_test_icsdf = X_test_tfidf.multiply(</span>
+<span class="c1">#     icsdf</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">csr_matrix</span>
-<span class="n">X_train_icsdf</span> <span class="o">=</span> <span class="n">csr_matrix</span><span class="p">(</span>
-    <span class="n">X_train_icsdf</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from scipy.sparse import csr_matrix</span>
+<span class="c1"># X_train_icsdf = csr_matrix(</span>
+<span class="c1">#     X_train_icsdf</span>
+<span class="c1"># )</span>
 
-<span class="n">X_test_icsdf</span> <span class="o">=</span> <span class="n">csr_matrix</span><span class="p">(</span>
-    <span class="n">X_test_icsdf</span>
-<span class="p">)</span>
+<span class="c1"># X_test_icsdf = csr_matrix(</span>
+<span class="c1">#     X_test_icsdf</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
@@ -2309,38 +2317,38 @@ Name: count, dtype: int64
 <p>Hasil perhitungan rata-rata tersebut kemudian diubah bentuknya dan diratakan menjadi sebuah daftar angka satu dimensi (seperti sebuah baris panjang berisi nilai-nilai). Hal ini biasanya dilakukan agar skor dari tiap kata tersebut lebih mudah diproses pada tahap selanjutnya, misalnya untuk mengurutkan atau menyeleksi kata mana yang memiliki skor rata-rata paling tinggi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">skor_fitur</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span>
-    <span class="n">X_train_icsdf</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
-        <span class="n">axis</span><span class="o">=</span><span class="mi">0</span>
-    <span class="p">)</span>
-<span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># skor_fitur = np.asarray(</span>
+<span class="c1">#     X_train_icsdf.mean(</span>
+<span class="c1">#         axis=0</span>
+<span class="c1">#     )</span>
+<span class="c1"># ).ravel()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">TOP_K</span> <span class="o">=</span> <span class="mi">100</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TOP_K = 100</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span>
-    <span class="n">skor_fitur</span>
-<span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="n">TOP_K</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># top_index = np.argsort(</span>
+<span class="c1">#     skor_fitur</span>
+<span class="c1"># )[::-1][:TOP_K]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kata_penting</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span>
-    <span class="n">top_index</span>
-<span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># kata_penting = features[</span>
+<span class="c1">#     top_index</span>
+<span class="c1"># ]</span>
 
-<span class="n">kata_penting</span><span class="p">[:</span><span class="mi">30</span><span class="p">]</span>
+<span class="c1"># kata_penting[:30]</span>
 </pre></div>
 </div>
 </div>
@@ -2356,16 +2364,16 @@ Name: count, dtype: int64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_kata_penting</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df_kata_penting = pd.DataFrame({</span>
 
-    <span class="s2">"kata"</span><span class="p">:</span> <span class="n">kata_penting</span><span class="p">,</span>
+<span class="c1">#     "kata": kata_penting,</span>
 
-    <span class="s2">"skor"</span><span class="p">:</span> <span class="n">skor_fitur</span><span class="p">[</span>
-        <span class="n">top_index</span>
-    <span class="p">]</span>
-<span class="p">})</span>
+<span class="c1">#     "skor": skor_fitur[</span>
+<span class="c1">#         top_index</span>
+<span class="c1">#     ]</span>
+<span class="c1"># })</span>
 
-<span class="n">df_kata_penting</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="c1"># df_kata_penting.head(30)</span>
 </pre></div>
 </div>
 </div>
@@ -2552,30 +2560,30 @@ Name: count, dtype: int64
 <h2>14. Reduksi Menjadi 100 Fitur ICSDF<a class="headerlink" href="#reduksi-menjadi-100-fitur-icsdf" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_selected</span> <span class="o">=</span> <span class="n">X_train_icsdf</span><span class="p">[</span>
-    <span class="p">:,</span>
-    <span class="n">top_index</span>
-<span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># X_train_selected = X_train_icsdf[</span>
+<span class="c1">#     :,</span>
+<span class="c1">#     top_index</span>
+<span class="c1"># ]</span>
 
-<span class="n">X_test_selected</span> <span class="o">=</span> <span class="n">X_test_icsdf</span><span class="p">[</span>
-    <span class="p">:,</span>
-    <span class="n">top_index</span>
-<span class="p">]</span>
+<span class="c1"># X_test_selected = X_test_icsdf[</span>
+<span class="c1">#     :,</span>
+<span class="c1">#     top_index</span>
+<span class="c1"># ]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
-    <span class="s2">"Sebelum seleksi:"</span><span class="p">,</span>
-    <span class="n">X_train_tfidf</span><span class="o">.</span><span class="n">shape</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print(</span>
+<span class="c1">#     "Sebelum seleksi:",</span>
+<span class="c1">#     X_train_tfidf.shape</span>
+<span class="c1"># )</span>
 
-<span class="nb">print</span><span class="p">(</span>
-    <span class="s2">"Sesudah ICSDF:"</span><span class="p">,</span>
-    <span class="n">X_train_selected</span><span class="o">.</span><span class="n">shape</span>
-<span class="p">)</span>
+<span class="c1"># print(</span>
+<span class="c1">#     "Sesudah ICSDF:",</span>
+<span class="c1">#     X_train_selected.shape</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
@@ -2591,21 +2599,21 @@ Sesudah ICSDF: (160, 100)
 <h2>15. Tabel Hasil ICSDF<a class="headerlink" href="#tabel-hasil-icsdf" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">icsdf_train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># icsdf_train_df = pd.DataFrame(</span>
 
-    <span class="n">X_train_selected</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span>
+<span class="c1">#     X_train_selected.toarray(),</span>
 
-    <span class="n">columns</span><span class="o">=</span><span class="n">kata_penting</span>
-<span class="p">)</span>
+<span class="c1">#     columns=kata_penting</span>
+<span class="c1"># )</span>
 
-<span class="n">icsdf_train_df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+<span class="c1"># icsdf_train_df["label"] = (</span>
 
-    <span class="n">y_train</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span>
-        <span class="n">drop</span><span class="o">=</span><span class="kc">True</span>
-    <span class="p">)</span>
-<span class="p">)</span>
+<span class="c1">#     y_train.reset_index(</span>
+<span class="c1">#         drop=True</span>
+<span class="c1">#     )</span>
+<span class="c1"># )</span>
 
-<span class="n">icsdf_train_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="c1"># icsdf_train_df.head()</span>
 </pre></div>
 </div>
 </div>
@@ -2779,10 +2787,10 @@ Sesudah ICSDF: (160, 100)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">icsdf_train_df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span>
-    <span class="s2">"data_icsdf_training.xlsx"</span><span class="p">,</span>
-    <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># icsdf_train_df.to_excel(</span>
+<span class="c1">#     "data_icsdf_training.xlsx",</span>
+<span class="c1">#     index=False</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
@@ -2805,39 +2813,39 @@ Sesudah ICSDF: (160, 100)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_selected_dense</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">X_train_selected</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># X_train_selected_dense = (</span>
+<span class="c1">#     X_train_selected.toarray()</span>
+<span class="c1"># )</span>
 
-<span class="n">X_test_selected_dense</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">X_test_selected</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
-<span class="p">)</span>
+<span class="c1"># X_test_selected_dense = (</span>
+<span class="c1">#     X_test_selected.toarray()</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_pca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span>
-    <span class="n">X_train_selected_dense</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># X_train_pca = pca.fit_transform(</span>
+<span class="c1">#     X_train_selected_dense</span>
+<span class="c1"># )</span>
 
-<span class="n">X_test_pca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
-    <span class="n">X_test_selected_dense</span>
-<span class="p">)</span>
+<span class="c1"># X_test_pca = pca.transform(</span>
+<span class="c1">#     X_test_selected_dense</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
-    <span class="n">X_train_pca</span><span class="o">.</span><span class="n">shape</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print(</span>
+<span class="c1">#     X_train_pca.shape</span>
+<span class="c1"># )</span>
 
-<span class="nb">print</span><span class="p">(</span>
-    <span class="n">X_test_pca</span><span class="o">.</span><span class="n">shape</span>
-<span class="p">)</span>
+<span class="c1"># print(</span>
+<span class="c1">#     X_test_pca.shape</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
@@ -2853,34 +2861,34 @@ Sesudah ICSDF: (160, 100)
 <h2>17. Membuat tabel data reduksi training<a class="headerlink" href="#membuat-tabel-data-reduksi-training" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nama_pc</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="sa">f</span><span class="s2">"PC</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span>
-        <span class="mi">1</span><span class="p">,</span>
-        <span class="mi">21</span>
-    <span class="p">)</span>
-<span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nama_pc = [</span>
+<span class="c1">#     f"PC{i}"</span>
+<span class="c1">#     for i in range(</span>
+<span class="c1">#         1,</span>
+<span class="c1">#         21</span>
+<span class="c1">#     )</span>
+<span class="c1"># ]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_train_reduksi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df_train_reduksi = pd.DataFrame(</span>
 
-    <span class="n">X_train_pca</span><span class="p">,</span>
+<span class="c1">#     X_train_pca,</span>
 
-    <span class="n">columns</span><span class="o">=</span><span class="n">nama_pc</span>
-<span class="p">)</span>
+<span class="c1">#     columns=nama_pc</span>
+<span class="c1"># )</span>
 
-<span class="n">df_train_reduksi</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+<span class="c1"># df_train_reduksi["label"] = (</span>
 
-    <span class="n">y_train</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span>
-        <span class="n">drop</span><span class="o">=</span><span class="kc">True</span>
-    <span class="p">)</span>
-<span class="p">)</span>
+<span class="c1">#     y_train.reset_index(</span>
+<span class="c1">#         drop=True</span>
+<span class="c1">#     )</span>
+<span class="c1"># )</span>
 
-<span class="n">df_train_reduksi</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="c1"># df_train_reduksi.head()</span>
 </pre></div>
 </div>
 </div>
@@ -3057,21 +3065,21 @@ Sesudah ICSDF: (160, 100)
 <h2>18. Data Testing<a class="headerlink" href="#data-testing" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_test_reduksi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df_test_reduksi = pd.DataFrame(</span>
 
-    <span class="n">X_test_pca</span><span class="p">,</span>
+<span class="c1">#     X_test_pca,</span>
 
-    <span class="n">columns</span><span class="o">=</span><span class="n">nama_pc</span>
-<span class="p">)</span>
+<span class="c1">#     columns=nama_pc</span>
+<span class="c1"># )</span>
 
-<span class="n">df_test_reduksi</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+<span class="c1"># df_test_reduksi["label"] = (</span>
 
-    <span class="n">y_test</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span>
-        <span class="n">drop</span><span class="o">=</span><span class="kc">True</span>
-    <span class="p">)</span>
-<span class="p">)</span>
+<span class="c1">#     y_test.reset_index(</span>
+<span class="c1">#         drop=True</span>
+<span class="c1">#     )</span>
+<span class="c1"># )</span>
 
-<span class="n">df_test_reduksi</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="c1"># df_test_reduksi.head()</span>
 </pre></div>
 </div>
 </div>
@@ -3243,20 +3251,96 @@ Sesudah ICSDF: (160, 100)
 <p>5 rows × 21 columns</p>
 </div></div></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================</span>
+<span class="c1"># PCA pada SELURUH 200 data (tanpa split)</span>
+<span class="c1"># ============================================</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">pca_result</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Ukuran hasil PCA: </span><span class="si">{</span><span class="n">pca_result</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ukuran hasil PCA: (200, 20)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================</span>
+<span class="c1"># GABUNGKAN DENGAN LABEL, SIMPAN SEBAGAI SATU FILE UTUH</span>
+<span class="c1"># ============================================</span>
+
+<span class="c1"># Versi TF-IDF penuh (sebelum reduksi)</span>
+<span class="n">tfidf_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">nama_fitur</span><span class="p">)</span>
+<span class="n">tfidf_df</span><span class="p">[</span><span class="s1">'label'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'label_num'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>  <span class="c1"># sesuaikan nama kolom label kamu</span>
+<span class="n">tfidf_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"data_new_tfidf_full.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Versi hasil PCA (sesudah reduksi)</span>
+<span class="n">pca_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pca_result</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">"PC</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)])</span>
+<span class="n">pca_df</span><span class="p">[</span><span class="s1">'label'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'label_num'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">pca_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"data_reduksi_full.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Tersimpan: data_tfidf_full.csv dan data_reduksi_full.csv"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tersimpan: data_tfidf_full.csv dan data_reduksi_full.csv
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Buat dataframe TF-IDF</span>
+<span class="n">tfidf_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">nama_fitur</span><span class="p">)</span>
+
+<span class="c1"># Cek dulu apakah kata "label" ada di vocabulary (penyebab bentrok sebelumnya)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'label'</span> <span class="ow">in</span> <span class="n">nama_fitur</span><span class="p">)</span>
+
+<span class="c1"># Buat kolom label terpisah</span>
+<span class="n">label_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'label_num'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'label'</span><span class="p">)</span>
+
+<span class="c1"># Gabungkan: tfidf_df DULU, baru label_series → otomatis label ada di paling belakang</span>
+<span class="n">tfidf_df_full</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tfidf_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> 
+                            <span class="n">label_series</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">tfidf_df_full</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>          <span class="c1"># (200, 5490)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tfidf_df_full</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span>   <span class="c1"># 3 kolom terakhir harus: [..., 'label']</span>
+
+<span class="n">tfidf_df_full</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"data_new_tfidf_full.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+(200, 5490)
+Index(['zulhas', 'zulkifli', 'label'], dtype='object')
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="simpan-data-reduksi">
 <h2>Simpan Data Reduksi<a class="headerlink" href="#simpan-data-reduksi" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_train_reduksi</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span>
-    <span class="s2">"data_reduksi_training.xlsx"</span><span class="p">,</span>
-    <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df_train_reduksi.to_excel(</span>
+<span class="c1">#     "data_reduksi_training.xlsx",</span>
+<span class="c1">#     index=False</span>
+<span class="c1"># )</span>
 
-<span class="n">df_test_reduksi</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span>
-    <span class="s2">"data_reduksi_testing.xlsx"</span><span class="p">,</span>
-    <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
-<span class="p">)</span>
+<span class="c1"># df_test_reduksi.to_excel(</span>
+<span class="c1">#     "data_reduksi_testing.xlsx",</span>
+<span class="c1">#     index=False</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
@@ -3266,15 +3350,15 @@ Sesudah ICSDF: (160, 100)
 <h2>Total Training Dan Testing<a class="headerlink" href="#total-training-dan-testing" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
-    <span class="s2">"Training :"</span><span class="p">,</span>
-    <span class="n">df_train_reduksi</span><span class="o">.</span><span class="n">shape</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print(</span>
+<span class="c1">#     "Training :",</span>
+<span class="c1">#     df_train_reduksi.shape</span>
+<span class="c1"># )</span>
 
-<span class="nb">print</span><span class="p">(</span>
-    <span class="s2">"Testing :"</span><span class="p">,</span>
-    <span class="n">df_test_reduksi</span><span class="o">.</span><span class="n">shape</span>
-<span class="p">)</span>
+<span class="c1"># print(</span>
+<span class="c1">#     "Testing :",</span>
+<span class="c1">#     df_test_reduksi.shape</span>
+<span class="c1"># )</span>
 </pre></div>
 </div>
 </div>
@@ -3287,7 +3371,7 @@ Testing : (40, 21)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_train_reduksi</span><span class="o">.</span><span class="n">columns</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df_train_reduksi.columns</span>
 </pre></div>
 </div>
 </div>
@@ -3296,6 +3380,19 @@ Testing : (40, 21)
        'PC11', 'PC12', 'PC13', 'PC14', 'PC15', 'PC16', 'PC17', 'PC18', 'PC19',
        'PC20', 'label'],
       dtype='object')
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import pandas as pd</span>
+
+<span class="c1"># # Load file xlsx</span>
+<span class="c1"># data = pd.read_excel("data_reduksi_training.xlsx")</span>
+
+<span class="c1"># # Simpan sebagai csv</span>
+<span class="c1"># data.to_csv("data_reduksi_training.csv", index=False)</span>
 </pre></div>
 </div>
 </div>
@@ -3343,11 +3440,11 @@ Testing : (40, 21)
       </div>
     </a>
     <a class="right-next"
-       href="Modeling.html"
+       href="Skipgram.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Modeling</p>
+        <p class="prev-next-title">Word Embedding: Skip-gram</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
