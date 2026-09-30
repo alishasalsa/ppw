@@ -13,8 +13,8 @@ chapters:
     title: Data Preparation
   - file: CRISP-DM/preprocessing
     title: Data Prepocessing
-  - file: CRISP-DM/Modeling
-    title: Modeling
+  - file: CRISP-DM/Skipgram
+    title: Skipgram
   - file: CRISP-DM/Output
     title: Evaluation
   - file: CRISP-DM/Production
