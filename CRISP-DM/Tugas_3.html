@@ -379,7 +379,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-model-gaussian-naive-bayes">— Membuat model Gaussian Naive Bayes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediksi-data-testing">— Prediksi data testing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-hasil-prediksi">— Tabel hasil prediksi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-29-accuracy">CELL 29 — Accuracy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">— Accuracy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-recall-f1-score">— Precision, Recall, F1-Score</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-report">— Classification Report</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">— Confusion Matrix</a></li>
@@ -1641,8 +1641,8 @@ Label sebenarnya:
 </div>
 <p>Kode tersebut digunakan untuk <strong>membuat tabel perbandingan antara label aktual dan hasil prediksi model</strong>, sekaligus menunjukkan apakah setiap prediksi benar atau salah. Pertama, <code class="docutils literal notranslate"><span class="pre">pd.DataFrame()</span></code> membuat DataFrame baru yang berisi kolom <code class="docutils literal notranslate"><span class="pre">Aktual</span></code> dari <code class="docutils literal notranslate"><span class="pre">y_test</span></code> dan kolom <code class="docutils literal notranslate"><span class="pre">Prediksi</span></code> dari <code class="docutils literal notranslate"><span class="pre">y_pred</span></code>. Selanjutnya, <code class="docutils literal notranslate"><span class="pre">np.where()</span></code> membandingkan nilai pada kedua kolom tersebut. Apabila label aktual sama dengan hasil prediksi, kolom <code class="docutils literal notranslate"><span class="pre">Benar/Salah</span></code> akan diisi <code class="docutils literal notranslate"><span class="pre">&quot;Benar&quot;</span></code>, sedangkan apabila berbeda akan diisi <code class="docutils literal notranslate"><span class="pre">&quot;Salah&quot;</span></code>. Terakhir, <code class="docutils literal notranslate"><span class="pre">display(hasil_prediksi)</span></code> digunakan untuk menampilkan seluruh hasil perbandingan dalam bentuk tabel sehingga dapat dilihat secara langsung data mana yang berhasil dan gagal diprediksi oleh model.</p>
 </section>
-<section id="cell-29-accuracy">
-<h2>CELL 29 — Accuracy<a class="headerlink" href="#cell-29-accuracy" title="Link to this heading">#</a></h2>
+<section id="accuracy">
+<h2>— Accuracy<a class="headerlink" href="#accuracy" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
@@ -2111,7 +2111,7 @@ hasil_preprocessing.xlsx
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-model-gaussian-naive-bayes">— Membuat model Gaussian Naive Bayes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediksi-data-testing">— Prediksi data testing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-hasil-prediksi">— Tabel hasil prediksi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-29-accuracy">CELL 29 — Accuracy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">— Accuracy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-recall-f1-score">— Precision, Recall, F1-Score</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-report">— Classification Report</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">— Confusion Matrix</a></li>
