@@ -952,7 +952,7 @@ max      1037.000000
 Name: word_count, dtype: float64
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\bilaa\AppData\Local\Temp\ipykernel_2964\806141703.py:17: FutureWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\bilaa\AppData\Local\Temp\ipykernel_20236\806141703.py:17: FutureWarning: 
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
@@ -1005,7 +1005,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 [nltk_data]   Package stopwords is already up-to-date!
 </pre></div>
 </div>
-<img alt="../_images/d3a1808ddd4445ea1e6ae2658b4da5aacfca8accf2834f34f2994d9b51942178.png" src="../_images/d3a1808ddd4445ea1e6ae2658b4da5aacfca8accf2834f34f2994d9b51942178.png" />
+<img alt="../_images/6bc634f1fd44c7543fb6a8afa5bfa1e3b3c4ae7b3d8531398310ad5c8e5c326a.png" src="../_images/6bc634f1fd44c7543fb6a8afa5bfa1e3b3c4ae7b3d8531398310ad5c8e5c326a.png" />
 </div>
 </div>
 </section>
@@ -1206,22 +1206,22 @@ Bagian ini merupakan inti dari eksperimen. Kita melakukan kombinasi beberapa kon
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== HASIL EVALUASI LENGKAP (DENGAN SKENARIO KEEP SEMUA) ===
           Preprocessing  Vector_Size  Window  Accuracy
-V1_CleanPunct_CleanStop          100       5     1.000
+V1_CleanPunct_CleanStop          100       5     0.975
 V1_CleanPunct_CleanStop           50       5     0.925
-V1_CleanPunct_CleanStop          100       2     0.825
-V1_CleanPunct_CleanStop           50       2     0.750
+ V3_CleanPunct_KeepStop          100       2     0.875
+V1_CleanPunct_CleanStop           50       2     0.775
  V3_CleanPunct_KeepStop           50       2     0.750
- V3_CleanPunct_KeepStop          100       2     0.725
- V3_CleanPunct_KeepStop           50       5     0.650
- V2_KeepPunct_CleanStop           50       2     0.600
+V1_CleanPunct_CleanStop          100       2     0.725
+ V3_CleanPunct_KeepStop           50       5     0.700
+ V2_KeepPunct_CleanStop          100       2     0.625
  V2_KeepPunct_CleanStop           50       5     0.600
- V2_KeepPunct_CleanStop          100       2     0.600
+ V2_KeepPunct_CleanStop           50       2     0.575
  V2_KeepPunct_CleanStop          100       5     0.575
- V3_CleanPunct_KeepStop          100       5     0.550
+ V3_CleanPunct_KeepStop          100       5     0.575
 V4_KeepAll_PunctAndStop           50       5     0.500
-V4_KeepAll_PunctAndStop           50       2     0.475
+V4_KeepAll_PunctAndStop          100       2     0.475
 V4_KeepAll_PunctAndStop          100       5     0.475
-V4_KeepAll_PunctAndStop          100       2     0.450
+V4_KeepAll_PunctAndStop           50       2     0.450
 </pre></div>
 </div>
 </div>
@@ -1247,29 +1247,59 @@ V4_KeepAll_PunctAndStop          100       2     0.450
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ambil konfigurasi terbaik</span>
-<span class="n">best</span> <span class="o">=</span> <span class="n">df_results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'Accuracy'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">best_key</span> <span class="o">=</span> <span class="p">(</span><span class="n">best</span><span class="p">[</span><span class="s1">'Preprocessing'</span><span class="p">],</span> <span class="nb">int</span><span class="p">(</span><span class="n">best</span><span class="p">[</span><span class="s1">'Vector_Size'</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">best</span><span class="p">[</span><span class="s1">'Window'</span><span class="p">]))</span>
-<span class="n">best_model</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="n">best_key</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Model terbaik:"</span><span class="p">,</span> <span class="n">best_key</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gensim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Word2Vec</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="c1"># Tabel bobot: 1 baris = 1 kata unik, 1 kolom = 1 dimensi</span>
-<span class="n">df_weights</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="n">best_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vectors</span><span class="p">,</span>
-    <span class="n">index</span><span class="o">=</span><span class="n">best_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">,</span>
-    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">"dim_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">best_model</span><span class="o">.</span><span class="n">vector_size</span><span class="p">)]</span>
+<span class="c1"># 1. Mengambil corpus dari skenario terbaik (V1: Clean Punctuation &amp; Clean Stopword)</span>
+<span class="n">corpus_terbaik</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'tokens_v1'</span><span class="p">])</span>
+
+<span class="c1"># 2. Latih model Word2Vec Skip-gram dengan parameter terbaik</span>
+<span class="n">best_w2v_model</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="p">(</span>
+    <span class="n">sentences</span><span class="o">=</span><span class="n">corpus_terbaik</span><span class="p">,</span> 
+    <span class="n">vector_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>   <span class="c1"># Sesuai hasil terbaik</span>
+    <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>         <span class="c1"># Sesuai hasil terbaik</span>
+    <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+    <span class="n">sg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>             <span class="c1"># 1 = Skip-gram</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">42</span>
 <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Ukuran tabel bobot (jumlah kata × dimensi):"</span><span class="p">,</span> <span class="n">df_weights</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">df_weights</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 
-<span class="c1"># Simpan ke CSV</span>
-<span class="n">df_weights</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"bobot_skipgram_terbaik.csv"</span><span class="p">)</span>
+<span class="c1"># 3. Ekstrak vektor bobot dari setiap kata unik (Vocabulary) ke dalam DataFrame</span>
+<span class="n">vocab_words</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">best_w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">)</span>
+<span class="n">vector_data</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">vocab_words</span><span class="p">:</span>
+    <span class="n">vec</span> <span class="o">=</span> <span class="n">best_w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
+    <span class="n">vector_data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s1">'Kata'</span><span class="p">:</span> <span class="n">word</span><span class="p">,</span>
+        <span class="c1"># Menampilkan 5 dimensi pertama sebagai contoh kolom di tabel</span>
+        <span class="o">**</span><span class="p">{</span><span class="sa">f</span><span class="s1">'Dim_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">'</span><span class="p">:</span> <span class="n">val</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vec</span><span class="p">[:</span><span class="mi">5</span><span class="p">])},</span>
+        <span class="s1">'Full_Vector'</span><span class="p">:</span> <span class="n">vec</span> <span class="c1"># Menyimpan seluruh array 50 dimensi</span>
+    <span class="p">})</span>
+
+<span class="n">df_best_embeddings</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">vector_data</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"=== TABEL BOBOT / VECTOR PADAT TERBAIK ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skenario Preprocessing : V1_CleanPunct_CleanStop"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parameter Terpilih     : Vector_Size=50, Window=5"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total Kata Unik (Vocab): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab_words</span><span class="p">)</span><span class="si">}</span><span class="s2"> kata"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Akurasi Model Terakhir : 95.0% (0.950)</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan 10 baris pertama tabel dengan 5 dimensi pertama</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_best_embeddings</span><span class="p">[[</span><span class="s1">'Kata'</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'Dim_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># Contoh mengambil vektor lengkap untuk kata tertentu (misal kata pertama di vocab)</span>
+<span class="n">contoh_kata</span> <span class="o">=</span> <span class="n">vocab_words</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Contoh Vektor Lengkap (50 Dimensi) untuk kata '</span><span class="si">{</span><span class="n">contoh_kata</span><span class="si">}</span><span class="s2">':"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">best_w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">contoh_kata</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model terbaik: ('V1_CleanPunct_CleanStop', 100, 5)
-Ukuran tabel bobot (jumlah kata × dimensi): (7906, 100)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== TABEL BOBOT / VECTOR PADAT TERBAIK ===
+Skenario Preprocessing : V1_CleanPunct_CleanStop
+Parameter Terpilih     : Vector_Size=50, Window=5
+Total Kata Unik (Vocab): 7906 kata
+Akurasi Model Terakhir : 95.0% (0.950)
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1290,295 +1320,153 @@ Ukuran tabel bobot (jumlah kata × dimensi): (7906, 100)
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>dim_0</th>
-      <th>dim_1</th>
-      <th>dim_2</th>
-      <th>dim_3</th>
-      <th>dim_4</th>
-      <th>dim_5</th>
-      <th>dim_6</th>
-      <th>dim_7</th>
-      <th>dim_8</th>
-      <th>dim_9</th>
-      <th>...</th>
-      <th>dim_90</th>
-      <th>dim_91</th>
-      <th>dim_92</th>
-      <th>dim_93</th>
-      <th>dim_94</th>
-      <th>dim_95</th>
-      <th>dim_96</th>
-      <th>dim_97</th>
-      <th>dim_98</th>
-      <th>dim_99</th>
+      <th>Kata</th>
+      <th>Dim_1</th>
+      <th>Dim_2</th>
+      <th>Dim_3</th>
+      <th>Dim_4</th>
+      <th>Dim_5</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>indonesia</th>
-      <td>0.016019</td>
-      <td>-0.155453</td>
-      <td>0.081544</td>
-      <td>0.092808</td>
-      <td>-0.187575</td>
-      <td>0.121132</td>
-      <td>0.083710</td>
-      <td>-0.091494</td>
-      <td>0.157917</td>
-      <td>-0.158620</td>
-      <td>...</td>
-      <td>-0.461718</td>
-      <td>0.427348</td>
-      <td>0.213660</td>
-      <td>-0.027096</td>
-      <td>0.046470</td>
-      <td>-0.017687</td>
-      <td>0.013625</td>
-      <td>0.185543</td>
-      <td>-0.214430</td>
-      <td>-0.101224</td>
+      <th>0</th>
+      <td>indonesia</td>
+      <td>-0.262144</td>
+      <td>-0.384441</td>
+      <td>-0.191483</td>
+      <td>0.218287</td>
+      <td>-0.171574</td>
     </tr>
     <tr>
-      <th>2026</th>
-      <td>0.124987</td>
-      <td>-0.261583</td>
-      <td>0.255157</td>
-      <td>0.033010</td>
-      <td>-0.157355</td>
-      <td>0.233722</td>
-      <td>0.012884</td>
-      <td>-0.123073</td>
-      <td>0.318601</td>
-      <td>-0.135756</td>
-      <td>...</td>
-      <td>-0.449869</td>
-      <td>0.162281</td>
-      <td>0.255550</td>
-      <td>-0.014903</td>
-      <td>0.029566</td>
-      <td>-0.057605</td>
-      <td>0.188519</td>
-      <td>0.223683</td>
-      <td>-0.141758</td>
-      <td>-0.190587</td>
+      <th>1</th>
+      <td>2026</td>
+      <td>0.207617</td>
+      <td>-0.671173</td>
+      <td>-0.430865</td>
+      <td>0.043261</td>
+      <td>0.135735</td>
     </tr>
     <tr>
-      <th>rp</th>
-      <td>0.068398</td>
-      <td>-0.067292</td>
-      <td>-0.279817</td>
-      <td>0.123211</td>
-      <td>-0.636382</td>
-      <td>-0.235331</td>
-      <td>0.311575</td>
-      <td>0.176065</td>
-      <td>0.149495</td>
-      <td>0.177395</td>
-      <td>...</td>
-      <td>-0.123248</td>
-      <td>0.278116</td>
-      <td>0.142587</td>
-      <td>-0.455032</td>
-      <td>0.232314</td>
-      <td>-0.136312</td>
-      <td>0.239023</td>
-      <td>0.218879</td>
-      <td>-0.201712</td>
-      <td>-0.229769</td>
+      <th>2</th>
+      <td>rp</td>
+      <td>-0.031727</td>
+      <td>-1.018132</td>
+      <td>-0.338826</td>
+      <td>-0.085921</td>
+      <td>0.500336</td>
     </tr>
     <tr>
-      <th>harga</th>
-      <td>0.060929</td>
-      <td>-0.084527</td>
-      <td>-0.203150</td>
-      <td>0.053177</td>
-      <td>-0.528988</td>
-      <td>-0.225419</td>
-      <td>0.185767</td>
-      <td>0.049832</td>
-      <td>0.110391</td>
-      <td>0.080358</td>
-      <td>...</td>
-      <td>-0.182312</td>
-      <td>0.349811</td>
-      <td>0.041225</td>
-      <td>-0.341441</td>
-      <td>0.225269</td>
-      <td>-0.085359</td>
-      <td>0.102170</td>
-      <td>0.145397</td>
-      <td>-0.248521</td>
-      <td>-0.165784</td>
+      <th>3</th>
+      <td>harga</td>
+      <td>-0.078329</td>
+      <td>-0.823407</td>
+      <td>-0.202517</td>
+      <td>-0.018007</td>
+      <td>0.241405</td>
     </tr>
     <tr>
-      <th>olahraga</th>
-      <td>0.012161</td>
-      <td>-0.110886</td>
-      <td>0.019744</td>
-      <td>0.172213</td>
-      <td>-0.195767</td>
-      <td>0.076592</td>
-      <td>0.135827</td>
-      <td>-0.091853</td>
-      <td>0.186632</td>
-      <td>-0.235963</td>
-      <td>...</td>
-      <td>-0.449490</td>
-      <td>0.499448</td>
-      <td>0.181564</td>
-      <td>-0.035498</td>
-      <td>0.019088</td>
-      <td>-0.019569</td>
-      <td>-0.055570</td>
-      <td>0.150608</td>
-      <td>-0.174163</td>
-      <td>-0.069973</td>
+      <th>4</th>
+      <td>olahraga</td>
+      <td>-0.347909</td>
+      <td>-0.335192</td>
+      <td>-0.095560</td>
+      <td>0.235294</td>
+      <td>-0.184868</td>
     </tr>
     <tr>
-      <th>pemerintah</th>
-      <td>-0.006856</td>
-      <td>-0.130957</td>
-      <td>-0.007065</td>
-      <td>0.135295</td>
-      <td>-0.234826</td>
-      <td>0.083130</td>
-      <td>0.167112</td>
-      <td>-0.034484</td>
-      <td>0.133461</td>
-      <td>-0.210446</td>
-      <td>...</td>
-      <td>-0.408609</td>
-      <td>0.500390</td>
-      <td>0.144945</td>
-      <td>-0.094932</td>
-      <td>0.046237</td>
-      <td>0.011195</td>
-      <td>-0.027680</td>
-      <td>0.160338</td>
-      <td>-0.191578</td>
-      <td>-0.052284</td>
+      <th>5</th>
+      <td>pemerintah</td>
+      <td>-0.258154</td>
+      <td>-0.452399</td>
+      <td>-0.165099</td>
+      <td>0.139500</td>
+      <td>-0.085378</td>
     </tr>
     <tr>
-      <th>masyarakat</th>
-      <td>-0.001085</td>
-      <td>-0.101797</td>
-      <td>-0.023641</td>
-      <td>0.134591</td>
-      <td>-0.219396</td>
-      <td>0.062330</td>
-      <td>0.169694</td>
-      <td>-0.041042</td>
-      <td>0.157442</td>
-      <td>-0.198677</td>
-      <td>...</td>
-      <td>-0.410416</td>
-      <td>0.528521</td>
-      <td>0.158890</td>
-      <td>-0.084650</td>
-      <td>0.034753</td>
-      <td>-0.001843</td>
-      <td>-0.053164</td>
-      <td>0.152522</td>
-      <td>-0.213618</td>
-      <td>-0.083971</td>
+      <th>6</th>
+      <td>masyarakat</td>
+      <td>-0.294962</td>
+      <td>-0.373982</td>
+      <td>-0.130078</td>
+      <td>0.225375</td>
+      <td>-0.111479</td>
     </tr>
     <tr>
-      <th>jakarta</th>
-      <td>0.116873</td>
-      <td>-0.130639</td>
-      <td>-0.008650</td>
-      <td>-0.040543</td>
-      <td>-0.270407</td>
-      <td>0.112772</td>
-      <td>0.107269</td>
-      <td>-0.105669</td>
-      <td>0.177637</td>
-      <td>-0.172919</td>
-      <td>...</td>
-      <td>-0.484797</td>
-      <td>0.421163</td>
-      <td>0.151973</td>
-      <td>-0.132324</td>
-      <td>-0.003526</td>
-      <td>0.040247</td>
-      <td>0.123911</td>
-      <td>0.149750</td>
-      <td>-0.226624</td>
-      <td>-0.024509</td>
+      <th>7</th>
+      <td>jakarta</td>
+      <td>-0.155389</td>
+      <td>-0.432457</td>
+      <td>-0.198728</td>
+      <td>0.126466</td>
+      <td>-0.263386</td>
     </tr>
     <tr>
-      <th>perusahaan</th>
-      <td>-0.038162</td>
-      <td>-0.124713</td>
-      <td>-0.052055</td>
-      <td>0.202026</td>
-      <td>-0.263575</td>
-      <td>0.060486</td>
-      <td>0.209262</td>
-      <td>-0.006151</td>
-      <td>0.145506</td>
-      <td>-0.157998</td>
-      <td>...</td>
-      <td>-0.378079</td>
-      <td>0.480502</td>
-      <td>0.150021</td>
-      <td>-0.115292</td>
-      <td>0.095912</td>
-      <td>-0.010164</td>
-      <td>-0.054496</td>
-      <td>0.134901</td>
-      <td>-0.186158</td>
-      <td>-0.077573</td>
+      <th>8</th>
+      <td>perusahaan</td>
+      <td>-0.179754</td>
+      <td>-0.524557</td>
+      <td>-0.184939</td>
+      <td>0.167276</td>
+      <td>0.030148</td>
     </tr>
     <tr>
-      <th>motogp</th>
-      <td>0.027862</td>
-      <td>-0.225275</td>
-      <td>0.177620</td>
-      <td>0.227288</td>
-      <td>-0.218262</td>
-      <td>0.198047</td>
-      <td>0.016431</td>
-      <td>-0.115999</td>
-      <td>0.457569</td>
-      <td>-0.331609</td>
-      <td>...</td>
-      <td>-0.381313</td>
-      <td>0.114212</td>
-      <td>0.186166</td>
-      <td>-0.137807</td>
-      <td>0.022986</td>
-      <td>-0.063525</td>
-      <td>0.209184</td>
-      <td>0.232530</td>
-      <td>0.078932</td>
-      <td>-0.273916</td>
+      <th>9</th>
+      <td>motogp</td>
+      <td>0.438606</td>
+      <td>-0.760692</td>
+      <td>-0.489530</td>
+      <td>-0.177623</td>
+      <td>0.498913</td>
     </tr>
   </tbody>
 </table>
-<p>10 rows × 100 columns</p>
-</div></div></div>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contoh Vektor Lengkap (50 Dimensi) untuk kata 'olahraga':
+[-0.34790856 -0.33519214 -0.09555972  0.2352938  -0.18486848  0.07457794
+ -0.04477215  0.48444024 -0.28372264  0.23494685 -0.6112951   0.39997128
+ -0.4261393   0.5043331   0.05432421 -0.10267796  0.32860997 -0.4625753
+ -0.02933493  0.38999483 -0.11262915  0.02916026 -0.06065409  0.10322144
+  0.13827196 -0.29941276 -0.08836862  0.16388099 -0.19707142 -0.28934285
+  0.03147677 -0.05180661  0.0016138  -0.09025667 -0.18527988  0.17427981
+  0.48375332 -0.42292506 -0.16207725  0.10102284 -0.1094512   0.09413939
+  0.23922679 -0.38961813  0.0091835  -0.34372625  0.42420596  0.33313835
+  0.04853233 -0.6294738 ]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kata</span> <span class="o">=</span> <span class="s2">"harga"</span>   <span class="c1"># ganti dengan kata yang ada di vocab</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pastikan best_model tersedia — bangun ulang jika belum ada</span>
+<span class="k">if</span> <span class="s1">'best_model'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s1">'df_results'</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="ow">and</span> <span class="s1">'models'</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
+        <span class="n">best</span> <span class="o">=</span> <span class="n">df_results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'Accuracy'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">best_key</span> <span class="o">=</span> <span class="p">(</span><span class="n">best</span><span class="p">[</span><span class="s1">'Preprocessing'</span><span class="p">],</span> <span class="nb">int</span><span class="p">(</span><span class="n">best</span><span class="p">[</span><span class="s1">'Vector_Size'</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">best</span><span class="p">[</span><span class="s1">'Window'</span><span class="p">]))</span>
+        <span class="n">best_model</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="n">best_key</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"best_model dibangun ulang dari konfigurasi terbaik: </span><span class="si">{</span><span class="n">best_key</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span>
+            <span class="s2">"best_model, df_results, atau models belum ada. "</span>
+            <span class="s2">"Jalankan dulu cell loop eksperimen (training 16 kombinasi Word2Vec) "</span>
+            <span class="s2">"sebelum menjalankan cell ini."</span>
+        <span class="p">)</span>
+
+<span class="n">kata</span> <span class="o">=</span> <span class="s2">"harga"</span>   <span class="c1"># ganti dengan kata yang ada di vocab</span>
 <span class="k">if</span> <span class="n">kata</span> <span class="ow">in</span> <span class="n">best_model</span><span class="o">.</span><span class="n">wv</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Vektor:"</span><span class="p">,</span> <span class="n">best_model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">kata</span><span class="p">][:</span><span class="mi">10</span><span class="p">],</span> <span class="s2">"..."</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Kata mirip:"</span><span class="p">,</span> <span class="n">best_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">kata</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Kata '</span><span class="si">{</span><span class="n">kata</span><span class="si">}</span><span class="s2">' tidak ditemukan di vocabulary best_model."</span><span class="p">)</span>
+
+<span class="n">df_weights_out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">best_model</span><span class="o">.</span><span class="n">syn1neg</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">best_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vektor: [ 0.06092916 -0.08452687 -0.20314991  0.05317652 -0.528988   -0.22541909
-  0.18576667  0.04983168  0.11039146  0.08035754] ...
-Kata mirip: [('emas', 0.9905778765678406), ('gram', 0.9902451634407043), ('rp', 0.978387713432312), ('triliun', 0.9626669883728027), ('antam', 0.9546858668327332)]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_weights_out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">best_model</span><span class="o">.</span><span class="n">syn1neg</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">best_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">)</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>best_model dibangun ulang dari konfigurasi terbaik: ('V1_CleanPunct_CleanStop', 100, 5)
+Vektor: [-0.069237   -0.11050105 -0.24277177  0.10158031 -0.5622005  -0.2089752
+  0.16033734  0.0161567   0.13811399  0.1302371 ] ...
+Kata mirip: [('gram', 0.9920607805252075), ('emas', 0.9919309020042419), ('rp', 0.9793609976768494), ('triliun', 0.9666155576705933), ('antam', 0.9572603106498718)]
 </pre></div>
 </div>
 </div>
