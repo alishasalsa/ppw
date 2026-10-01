@@ -1238,9 +1238,42 @@ V4_KeepAll_PunctAndStop           50       2     0.450
         <span class="k">for</span> <span class="n">win</span> <span class="ow">in</span> <span class="n">windows</span><span class="p">:</span>
             <span class="n">w2v_model</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="p">(</span><span class="n">sentences</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span> <span class="n">vector_size</span><span class="o">=</span><span class="n">v_size</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">win</span><span class="p">,</span>
                                  <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-            <span class="n">models</span><span class="p">[(</span><span class="n">scen_name</span><span class="p">,</span> <span class="n">v_size</span><span class="p">,</span> <span class="n">win</span><span class="p">)]</span> <span class="o">=</span> <span class="n">w2v_model</span>   <span class="c1"># &lt;-- TAMBAHAN</span>
+            <span class="n">models</span><span class="p">[(</span><span class="n">scen_name</span><span class="p">,</span> <span class="n">v_size</span><span class="p">,</span> <span class="n">win</span><span class="p">)]</span> <span class="o">=</span> <span class="n">w2v_model</span>  
             
-            <span class="c1"># ... sisanya sama seperti kode Anda ...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">'best_model'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s1">'df_results'</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="ow">and</span> <span class="s1">'models'</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
+        <span class="n">best</span> <span class="o">=</span> <span class="n">df_results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'Accuracy'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">best_key</span> <span class="o">=</span> <span class="p">(</span><span class="n">best</span><span class="p">[</span><span class="s1">'Preprocessing'</span><span class="p">],</span> <span class="nb">int</span><span class="p">(</span><span class="n">best</span><span class="p">[</span><span class="s1">'Vector_Size'</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">best</span><span class="p">[</span><span class="s1">'Window'</span><span class="p">]))</span>
+        <span class="n">best_model</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="n">best_key</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"best_model dibangun ulang dari konfigurasi terbaik: </span><span class="si">{</span><span class="n">best_key</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span>
+            <span class="s2">"best_model, df_results, atau models belum ada. "</span>
+            <span class="s2">"Jalankan dulu cell loop eksperimen (training 16 kombinasi Word2Vec) "</span>
+            <span class="s2">"sebelum menjalankan cell ini."</span>
+        <span class="p">)</span>
+
+<span class="n">kata</span> <span class="o">=</span> <span class="s2">"harga"</span>   <span class="c1"># ganti dengan kata yang ada di vocab</span>
+<span class="k">if</span> <span class="n">kata</span> <span class="ow">in</span> <span class="n">best_model</span><span class="o">.</span><span class="n">wv</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Vektor:"</span><span class="p">,</span> <span class="n">best_model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">kata</span><span class="p">][:</span><span class="mi">10</span><span class="p">],</span> <span class="s2">"..."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Kata mirip:"</span><span class="p">,</span> <span class="n">best_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">kata</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Kata '</span><span class="si">{</span><span class="n">kata</span><span class="si">}</span><span class="s2">' tidak ditemukan di vocabulary best_model."</span><span class="p">)</span>
+
+<span class="n">df_weights_out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">best_model</span><span class="o">.</span><span class="n">syn1neg</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">best_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vektor: [-0.069237   -0.11050105 -0.24277177  0.10158031 -0.5622005  -0.2089752
+  0.16033734  0.0161567   0.13811399  0.1302371 ] ...
+Kata mirip: [('gram', 0.9920607805252075), ('emas', 0.9919309020042419), ('rp', 0.9793609976768494), ('triliun', 0.9666155576705933), ('antam', 0.9572603106498718)]
 </pre></div>
 </div>
 </div>
@@ -1431,42 +1464,6 @@ Akurasi Model Terakhir : 95.0% (0.950)
   0.48375332 -0.42292506 -0.16207725  0.10102284 -0.1094512   0.09413939
   0.23922679 -0.38961813  0.0091835  -0.34372625  0.42420596  0.33313835
   0.04853233 -0.6294738 ]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pastikan best_model tersedia — bangun ulang jika belum ada</span>
-<span class="k">if</span> <span class="s1">'best_model'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
-    <span class="k">if</span> <span class="s1">'df_results'</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="ow">and</span> <span class="s1">'models'</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
-        <span class="n">best</span> <span class="o">=</span> <span class="n">df_results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'Accuracy'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">best_key</span> <span class="o">=</span> <span class="p">(</span><span class="n">best</span><span class="p">[</span><span class="s1">'Preprocessing'</span><span class="p">],</span> <span class="nb">int</span><span class="p">(</span><span class="n">best</span><span class="p">[</span><span class="s1">'Vector_Size'</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">best</span><span class="p">[</span><span class="s1">'Window'</span><span class="p">]))</span>
-        <span class="n">best_model</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="n">best_key</span><span class="p">]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"best_model dibangun ulang dari konfigurasi terbaik: </span><span class="si">{</span><span class="n">best_key</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span>
-            <span class="s2">"best_model, df_results, atau models belum ada. "</span>
-            <span class="s2">"Jalankan dulu cell loop eksperimen (training 16 kombinasi Word2Vec) "</span>
-            <span class="s2">"sebelum menjalankan cell ini."</span>
-        <span class="p">)</span>
-
-<span class="n">kata</span> <span class="o">=</span> <span class="s2">"harga"</span>   <span class="c1"># ganti dengan kata yang ada di vocab</span>
-<span class="k">if</span> <span class="n">kata</span> <span class="ow">in</span> <span class="n">best_model</span><span class="o">.</span><span class="n">wv</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Vektor:"</span><span class="p">,</span> <span class="n">best_model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">kata</span><span class="p">][:</span><span class="mi">10</span><span class="p">],</span> <span class="s2">"..."</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Kata mirip:"</span><span class="p">,</span> <span class="n">best_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">kata</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Kata '</span><span class="si">{</span><span class="n">kata</span><span class="si">}</span><span class="s2">' tidak ditemukan di vocabulary best_model."</span><span class="p">)</span>
-
-<span class="n">df_weights_out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">best_model</span><span class="o">.</span><span class="n">syn1neg</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">best_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>best_model dibangun ulang dari konfigurasi terbaik: ('V1_CleanPunct_CleanStop', 100, 5)
-Vektor: [-0.069237   -0.11050105 -0.24277177  0.10158031 -0.5622005  -0.2089752
-  0.16033734  0.0161567   0.13811399  0.1302371 ] ...
-Kata mirip: [('gram', 0.9920607805252075), ('emas', 0.9919309020042419), ('rp', 0.9793609976768494), ('triliun', 0.9666155576705933), ('antam', 0.9572603106498718)]
 </pre></div>
 </div>
 </div>
