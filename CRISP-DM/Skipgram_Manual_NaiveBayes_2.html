@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'CRISP-DM/Skipgram_Manual_NaiveBayes_2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Deployment" href="Production.html" />
+    <link rel="next" title="Tugas 3" href="Tugas_3.html" />
     <link rel="prev" title="Word Embedding: Skip-gram" href="Skipgram.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -188,7 +188,7 @@
 <li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Data Prepocessing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Skipgram.html">Skipgram</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Skipgram_Manual_NaiveBayes_2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Production.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas_3.html">Tugas_3</a></li>
 </ul>
 
     </div>
@@ -555,6 +555,16 @@ Contoh 5 pasangan pertama: [('chef', 'de'), ('chef', 'mission'), ('de', 'chef'),
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah pasangan: 260500
+
+Contoh bentuk one-hot (5 pasangan pertama):
+X_demo shape: (5, 7439) | Y_demo shape: (5, 7439)
+X_demo[0] (target one-hot): [0. 0. 0. ... 0. 0. 0.]
+Y_demo[0] (context one-hot): [0. 0. 0. ... 0. 0. 0.]
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="arsitektur-jaringan-saraf-tiruan-skip-gram-manual">
@@ -797,7 +807,20 @@ Contoh 5 pasangan pertama: [('chef', 'de'), ('chef', 'mission'), ('de', 'chef'),
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah pasangan: 260500
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">WINDOW</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">X_list</span><span class="p">,</span> <span class="n">Y_list</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">tokenized_corpus</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">idxs</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>         <span class="n">word2idx</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>         <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">sent</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>         <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">word2idx</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">center</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">idxs</span><span class="p">):</span>
+
+<span class="ne">NameError</span>: name 'tokenized_corpus' is not defined
 </pre></div>
 </div>
 </div>
@@ -1019,11 +1042,11 @@ weighted avg       0.66      0.62      0.61        40
       </div>
     </a>
     <a class="right-next"
-       href="Production.html"
+       href="Tugas_3.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Deployment</p>
+        <p class="prev-next-title">Tugas 3</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
